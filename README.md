@@ -39,5 +39,5 @@ __hardest part__
 - the hardest part of this app will be filtering all the offers on location.
 
 __similar__
-- a site that works like this is marktplaats.nl , on this site you can filter items by their location
+- a site that works like this is  http://www.marktplaats.nl , on this site you can filter items by their location
 - a site which helps you find musicians is http://www.bandledengezocht.nl/
