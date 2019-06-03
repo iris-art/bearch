@@ -15,7 +15,6 @@ If you don't have loads of contacts in the music-world but have lots of talent p
 - an app, that'll connect all the bands with all the available musicians the app will contain a reaction option, if someone pushes that button it will send their account to the band who placed the request for musicians.
 
 __features__
-
 - a filter screen to select location, genre, instrument, age.
 - a list of available bands or musicians
 - the possiblity to make an offer for musicians
@@ -24,7 +23,6 @@ __features__
 - send musicians request for your band
 
 __optional features__
-
 - make an own chatbox for messages
 - filter within a radius from some place
 
@@ -32,10 +30,10 @@ __optional features__
 
 - Google maps API for getting distance : https://developers.google.com/maps/documentation/distance-matrix/intro
 - a database for the API : https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase
-- an API that handles all the requests for the database
+- an API that handles all the requests for the login and database : https://github.com/anajetli/android_login_registration_via_api
+- webhosting for the api : 000webhost.com
 
 __hardest part__
-
 - the hardest part of this app will be filtering all the offers on location.
 
 __similar__
