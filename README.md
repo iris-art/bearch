@@ -33,10 +33,11 @@ __optional features__
 - Google maps API for getting distance : https://developers.google.com/maps/documentation/distance-matrix/intro
 - a database for the API : https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase
 - an API that handles all the requests for the login and database : https://github.com/anajetli/android_login_registration_via_api
-- webhosting for the api : 000webhost.com
+- webhosting for the api : https://www.000webhost.com
 
 __hardest part__
 - the hardest part of this app will be filtering all the offers on location.
 
 __similar__
 - a site that works like this is marktplaats.nl , on this site you can filter items by their location
+- a site which helps you find musicians is http://www.bandledengezocht.nl/
