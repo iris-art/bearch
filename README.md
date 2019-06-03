@@ -18,13 +18,15 @@ __features__
 - a filter screen to select location, genre, instrument, age.
 - a list of available bands or musicians
 - the possiblity to make an offer for musicians
-- make account
+- make account and create a band
 - reply on request for musicians
 - send musicians request for your band
+- add musicians to your band and see who is in your band
 
 __optional features__
 - make an own chatbox for messages
 - filter within a radius from some place
+- option for a band to be booked by this app
 
 ## Prerequisites
 
