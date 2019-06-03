@@ -1,8 +1,8 @@
 # bearch, the app where you'll find a music-band that suits you
 
-__Joost Bankras__
+__name:__ Joost Bankras
 
-12377775
+__student number:__ 12377775
 
 My final product of this minor will be an app for musicians who are looking for a band to play with. The app will allow the people who are in need of a band to see which bands nearby are looking for musicians so they can contact each other.
 
