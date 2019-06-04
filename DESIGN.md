@@ -9,4 +9,4 @@ At the filter the user is allowed to filter the results and if they continue the
 
 - There will be one kind of users but you'll be allowed to make a new band if you aren't in one. With that band you can make new offers for other musicans.
 
-![Design](https://user-images.githubusercontent.com/47153142/58806477-8af18f80-8616-11e9-9dc0-839d7c4421a5.png)
+![Design](https://user-images.githubusercontent.com/47153142/58864320-c0e55100-86b4-11e9-9903-fa3422d3fd17.png)
