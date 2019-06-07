@@ -26,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClick2(View view){
+        Intent intent = new Intent(this, FilterBandActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClick3(View view){
+        Intent intent = new Intent(this, FilterMusicanActivity.class);
+        startActivity(intent);
+    }
+
     public void onClick4(View view){
         Intent intent = new Intent(this, LogInActivity.class);
         startActivity(intent);
