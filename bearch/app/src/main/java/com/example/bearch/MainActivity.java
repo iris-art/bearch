@@ -1,10 +1,13 @@
 package com.example.bearch;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,11 +15,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy = new
-                    StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
+
+        SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
+        String Name =sharedPreferences.getString("Name","None");
+        SharedPreferences sharedPreferences1=getSharedPreferences("Band",MODE_PRIVATE);
+        String Band =sharedPreferences1.getString("Band","None");
+        Button btnCreate = findViewById(R.id.button1);
+        Button btnLogin = findViewById(R.id.loginbutton);
+        Button btnRegister = findViewById(R.id.registerbutton);
+        Button btnAccount = findViewById(R.id.accountButton);
+        Button btnLogout = findViewById(R.id.logoutButton);
+
+        if (Name.equals("None")){
+            btnCreate.setClickable(false);
+            btnCreate.setText("Please log in to create your band");
+        }
+        else{
+            btnLogin.setVisibility(View.INVISIBLE);
+            btnLogin.setClickable(false);
+            btnRegister.setClickable(false);
+            btnRegister.setVisibility(View.INVISIBLE);
+            btnAccount.setVisibility(View.VISIBLE);
+            btnAccount.setClickable(true);
+            btnLogout.setClickable(true);
+            btnLogout.setVisibility(View.VISIBLE);
+        }
+        Log.d("Band = ", Band);
+        if (Band.equals("None")) {
+
+            btnCreate.setVisibility(View.INVISIBLE);
+            btnCreate.setClickable(false);
         }
 
     }
@@ -43,6 +71,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick5(View view){
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClick6(View view){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+    public void onClick7(View view){
+        Intent intent = new Intent(this, logoutActivity.class);
         startActivity(intent);
     }
 }

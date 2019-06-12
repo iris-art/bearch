@@ -44,68 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         spinner4 = findViewById(R.id.spinner4);
         String[] items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
         String[] items1 = new String[] {"Diverse", "Classic", "Folk", "Latin", "Schlager", "Jazz", "R&B", "Rock", "Pop", "Electronic"};
-        String[] items2 = new String[] {
-                "Singer",
-                "Accordion" ,
-                "Bagpipes" ,
-                "Banjo" ,
-                "Bass guitar" ,
-                "Bassoon" ,
-                "Berimbau" ,
-                "Bongo" ,
-                "Cello" ,
-                "Clarinet" ,
-                "Cor anglais" ,
-                "Cornet" ,
-                "Cymbal" ,
-                "Didgeridoo" ,
-                "Double bass" ,
-                "Drum kit" ,
-                "Euphonium" ,
-                "Flute" ,
-                "French horn" ,
-                "Glass harmonica" ,
-                "Glockenspiel" ,
-                "Gong" ,
-                "Guitar" ,
-                "Harmonica" ,
-                "Harp" ,
-                "Harpsichord" ,
-                "Hammered dulcimer" ,
-                "Hurdy gurdy" ,
-                "Jew’s harp" ,
-                "Kalimba" ,
-                "Lute" ,
-                "Lyre" ,
-                "Mandolin" ,
-                "Marimba" ,
-                "Melodica" ,
-                "Oboe" ,
-                "Ocarina" ,
-                "Octobass" ,
-                "Organ" ,
-                "Pan Pipes" ,
-                "Pennywhistle" ,
-                "Piano" ,
-                "Piccolo" ,
-                "Pungi" ,
-                "Recorder" ,
-                "Saxophone" ,
-                "Sitar" ,
-                "Synthesizer" ,
-                "Tambourine" ,
-                "Timpani" ,
-                "Triangle" ,
-                "Trombone" ,
-                "Trumpet" ,
-                "Theremin" ,
-                "Tuba" ,
-                "Ukulele" ,
-                "Viola" ,
-                "Violin" ,
-                "Whamola" ,
-                "Xylophone" ,
-                "Zither"};
+        String[] items2 = new String[] {"Singer", "Accordion" , "Bagpipes" , "Banjo" , "Bass guitar" , "Bassoon" , "Berimbau" , "Bongo" , "Cello" , "Clarinet" , "Cor anglais" , "Cornet" , "Cymbal" , "Didgeridoo" , "Double bass" , "Drum kit" , "Euphonium" , "Flute" , "French horn" , "Glass harmonica" , "Glockenspiel" , "Gong" , "Guitar" , "Harmonica" , "Harp" , "Harpsichord" , "Hammered dulcimer" , "Hurdy gurdy" , "Jew’s harp" , "Kalimba" , "Lute" , "Lyre" , "Mandolin" , "Marimba" , "Melodica" , "Oboe" , "Ocarina" , "Octobass" , "Organ" , "Pan Pipes" , "Pennywhistle" , "Piano" , "Piccolo" , "Pungi" , "Recorder" , "Saxophone" , "Sitar" , "Synthesizer" , "Tambourine" , "Timpani" , "Triangle" , "Trombone" , "Trumpet" , "Theremin" , "Tuba" , "Ukulele" , "Viola" , "Violin" , "Whamola" , "Xylophone" , "Zither"};
         setAdapter(items, spinner1);
         setAdapter(items1, spinner3);
         setAdapter(items2, spinner4);
@@ -194,29 +133,28 @@ public class RegisterActivity extends AppCompatActivity {
             String Location = strings[3];
             String Genre = strings[4];
             String Instrument = strings[5];
-
+            Log.d("INSTRUMENT = ", Instrument);
             System.out.println(Name + Email + Password);
             String finalURL = url_register + "?user_name="+ Name +
                     "&user_id=" + Email +
                     "&user_password=" + Password +
                     "&user_location=" + Location +
-                    "&user_genre=" + Genre +
-                    "&user_instrument" + Instrument;
+                    "&user_instrument=" + Instrument +
+                    "&user_genre=" + Genre;
 
+            Log.d("URL = ", finalURL);
             OkHttpClient okHttpClient = new OkHttpClient();
             Request request =  new Request.Builder()
                     .url(finalURL)
                     .get()
                     .build();
             Response response = null;
-            Log.d("passwords", etPassword.getText().toString() + etPassword1.getText().toString() );
-            if (etPassword.getText().toString() == etPassword1.getText().toString()){
+            if (etPassword.getText().toString().equals(etPassword1.getText().toString())){
                 try{
                     response = okHttpClient.newCall(request).execute();
                     if (response.isSuccessful()){
-                        Log.d("joe", "1");
                         String result = response.body().string();
-                        System.out.println(result);
+                        Log.d("result = ", result);
                         if (result.equalsIgnoreCase("User registered successfully")){
                             Log.d("joe", "2");
                             showToast("Register succesfull");
@@ -227,9 +165,6 @@ public class RegisterActivity extends AppCompatActivity {
                         }else if(result.equalsIgnoreCase("User already exists")){
                             Log.d("joe", "3");
                             showToast("User already exists");
-                        }else if(etPassword == etPassword1){
-                            Log.d("joe", "4");
-                            showToast("Password don't match!");
                         }else{
                             System.out.println(Name + Email + etPassword.getText().toString() + etPassword1.getText().toString());
                             showToast("Oops something went wrong!");

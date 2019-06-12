@@ -10,11 +10,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -60,17 +63,19 @@ public class LogInActivity extends AppCompatActivity {
             try{
                 response = okHttpClient.newCall(request).execute();
                 if(response.isSuccessful()){
-                    Log.d("gaat het?", "misschien");
                     String result = response.body().string();
-                    if (result.equalsIgnoreCase("login")){
-                        System.out.println(result);
+
+                    Log.d("result = ", result);
+                    if (result.equals("fail")){
+                        Toast.makeText(LogInActivity.this, "Email or Password mismatched!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        String[] string = result.split("~");
+                        saveUserInformation(string[1], string[0], string[3], string[2], string[5], string[4]);
+                        Log.d("INFORMATION = ", string.toString());
                         Intent i = new Intent(LogInActivity.this,
-                                ProfileActivity.class);
+                                MainActivity.class);
                         startActivity(i);
                         finish();
-                    }else{
-                        Log.d("gaat het?", "nee");
-                        Toast.makeText(LogInActivity.this, "Email or Password mismatched!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }catch(Exception e){
@@ -79,29 +84,34 @@ public class LogInActivity extends AppCompatActivity {
             return null;
         }
     }
-    public void saveUserInformation(String Name, String Email, String Genre, String Instrument, String Location){
+    public void saveUserInformation(String Name, String Email, String Genre, String Instrument, String Location, String Band){
+        Log.d("ITEMS = ", Instrument + Genre);
         SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
         SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
         SharedPreferences sharedPreferences2=getSharedPreferences("Genre",MODE_PRIVATE);
         SharedPreferences sharedPreferences3=getSharedPreferences("Instrument",MODE_PRIVATE);
         SharedPreferences sharedPreferences4=getSharedPreferences("Location",MODE_PRIVATE);
+        SharedPreferences sharedPreferences5=getSharedPreferences("Band",MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
         SharedPreferences.Editor editor2 = sharedPreferences2.edit();
         SharedPreferences.Editor editor3 = sharedPreferences3.edit();
         SharedPreferences.Editor editor4 = sharedPreferences4.edit();
+        SharedPreferences.Editor editor5 = sharedPreferences5.edit();
 
         editor.putString("Name",Name);
         editor1.putString("Email",Email);
         editor2.putString("Genre",Genre);
         editor3.putString("Instrument",Instrument);
         editor4.putString("Location",Location);
+        editor5.putString("Band",Band);
 
-        editor.commit();
-        editor1.commit();
-        editor2.commit();
-        editor3.commit();
-        editor4.commit();
+        editor.apply();
+        editor1.apply();
+        editor2.apply();
+        editor3.apply();
+        editor4.apply();
+        editor5.apply();
     }
 }

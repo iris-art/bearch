@@ -21,17 +21,15 @@ public class bandActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band);
         button = findViewById(R.id.button);
-        imageView = findViewById(R.id.imageView2);
+        imageView = findViewById(R.id.imageView4);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openGallery();
-            }
-        });
     }
 
-    private void openGallery() {
+    public void onClick(View view){
+        openGallery();
+    }
+
+    public void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
     }
