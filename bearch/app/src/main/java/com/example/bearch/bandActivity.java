@@ -20,7 +20,6 @@ public class bandActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band);
-        button = findViewById(R.id.button);
         imageView = findViewById(R.id.imageView4);
 
     }

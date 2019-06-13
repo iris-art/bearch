@@ -41,10 +41,19 @@ public class MainActivity extends AppCompatActivity {
             btnLogout.setVisibility(View.VISIBLE);
         }
         Log.d("Band = ", Band);
-        if (Band.equals("None")) {
+        if (!Band.equals("None")) {
 
-            btnCreate.setVisibility(View.INVISIBLE);
-            btnCreate.setClickable(false);
+            btnCreate.setVisibility(View.VISIBLE);
+            btnCreate.setClickable(true);
+            btnCreate.setText("My band");
+            btnCreate.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, bandActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
     }

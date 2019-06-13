@@ -71,11 +71,49 @@ public class LogInActivity extends AppCompatActivity {
                     }else{
                         String[] string = result.split("~");
                         saveUserInformation(string[1], string[0], string[3], string[2], string[5], string[4]);
-                        Log.d("INFORMATION = ", string.toString());
+                        Log.d("Band = ", string[4]);
+                        for (int i = 0; i < string.length; i++){
+                            Log.d("INFORMATION = ", string[i]);
+                        }
+                        if (!string[4].equals("None")){
+                            new getBandInformation().execute(string[4]);
+                        }
                         Intent i = new Intent(LogInActivity.this,
                                 MainActivity.class);
                         startActivity(i);
                         finish();
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+    public class getBandInformation extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String bandName = strings[0];
+            OkHttpClient okHttpClient = new OkHttpClient();
+
+            String url_band = "https://joostappapi.000webhostapp.com/read_bands.php" + "?band_name="
+                    + bandName;
+            Request request = new Request.Builder()
+                    .url(url_band)
+                    .build();
+            Response response = null;
+
+            try{
+                response = okHttpClient.newCall(request).execute();
+                if(response.isSuccessful()){
+                    String result = response.body().string();
+
+                    Log.d("result = ", result);
+                    if (result.equals("fail")){
+                        Toast.makeText(LogInActivity.this, "Email or Password mismatched!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Log.d("JOE", "joe");
                     }
                 }
             }catch(Exception e){

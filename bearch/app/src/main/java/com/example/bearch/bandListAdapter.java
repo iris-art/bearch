@@ -14,6 +14,8 @@ import static java.security.AccessController.getContext;
 
 public class bandListAdapter extends ArrayAdapter<String> {
 
+    ArrayList<String> ListItems;
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -24,7 +26,8 @@ public class bandListAdapter extends ArrayAdapter<String> {
         return super.getView(position, convertView, parent);
     }
 
-    public bandListAdapter(Context context, int resource) {
-        super(context, resource);
+    public bandListAdapter(Context context, int resource, ArrayList<String> objects) {
+        super(context, resource, objects);
+        ListItems = objects;
     }
 }

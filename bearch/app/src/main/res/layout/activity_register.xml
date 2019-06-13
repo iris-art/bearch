@@ -69,7 +69,7 @@
             android:layout_marginEnd="8dp"
             android:drawableLeft="@drawable/ic_action_name"
             android:ems="10"
-            android:hint="username"
+            android:hint="first and last name"
             android:inputType="textPersonName"
             android:textColorHint="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"

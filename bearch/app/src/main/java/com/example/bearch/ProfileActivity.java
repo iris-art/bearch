@@ -3,6 +3,7 @@ package com.example.bearch;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,14 +15,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ProfileActivity extends AppCompatActivity {
 
     Button btnSave;
+    EditText name;
+    EditText email;
     Spinner spinner1;
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
+    String Email;
     String[] items;
     Integer nrCity;
     private static final int PICK_IMAGE = 100;
@@ -35,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
         String Name = sharedPreferences.getString("Name", "None");
         SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
-        String Email = sharedPreferences1.getString("Email", "None");
+        Email = sharedPreferences1.getString("Email", "None");
         SharedPreferences sharedPreferences2=getSharedPreferences("Genre",MODE_PRIVATE);
         String Genre =sharedPreferences2.getString("Genre","None");
         SharedPreferences sharedPreferences3=getSharedPreferences("Instrument",MODE_PRIVATE);
@@ -47,13 +56,20 @@ public class ProfileActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView4);
         Button btnBand = findViewById(R.id.button10);
+        btnBand.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, bandActivity.class);
+                startActivity(intent);
+            }
+        });
         if (Band.equals("None")) {
             btnBand.setVisibility(View.INVISIBLE);
         }
 
-        EditText name = findViewById(R.id.editText10);
-        EditText email = findViewById(R.id.editText9);
+        name = findViewById(R.id.editText10);
+        email = findViewById(R.id.editText9);
 
         name.setText(Name);
         email.setText(Email);
@@ -80,17 +96,16 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         }
-        Log.d("Instrument =", Instrument);
-        Log.d("Genre =", Genre);
+
         for (int i = 0; i < items1.length; i++){
-            if (items1[i].equals(Genre)){
+            if (items1[i].equals(Instrument)){
                 spinner3.setSelection(i);
 
             }
         }
 
         for (int i = 0; i < items2.length; i++){
-            if (items2[i].equals(Instrument)){
+            if (items2[i].equals(Genre)){
                 spinner4.setSelection(i);
 
             }
@@ -174,8 +189,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void onClick(View view){
-        Intent intent = new Intent(this, bandActivity.class);
-        startActivity(intent);
+        new SaveUser().execute(name.getText().toString(), email.getText().toString(), spinner2.getSelectedItem().toString(), spinner3.getSelectedItem().toString(), spinner4.getSelectedItem().toString(), Email);
     }
 
     public void onClick1(View view){
@@ -195,4 +209,55 @@ public class ProfileActivity extends AppCompatActivity {
             imageView.setImageURI(imageURI);
         }
     }
+
+    public class SaveUser extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            String Name = strings[0];
+            String Email = strings[1];
+            String Location = strings[2];
+            String Genre = strings[3];
+            String Instrument = strings[4];
+            String Email1 = strings[5];
+            Log.d("INSTRUMENT = ", Instrument);
+            String finalURL = "https://joostappapi.000webhostapp.com/save_user.php" + "?user_name="+ Name +
+                    "&user_id1=" + Email1 +
+                    "&user_id=" + Email +
+                    "&user_location=" + Location +
+                    "&user_instrument=" + Instrument +
+                    "&user_genre=" + Genre;
+
+            Log.d("URL = ", Name + Email + Location + Genre + Instrument);
+            OkHttpClient okHttpClient = new OkHttpClient();
+            Request request =  new Request.Builder()
+                    .url(finalURL)
+                    .get()
+                    .build();
+            Response response = null;
+            try{
+                response = okHttpClient.newCall(request).execute();
+                String result = response.body().string();
+                Log.d("Result", result);
+                if (response.isSuccessful()){
+                    showToast("Profile Updated succesfully");
+                }else{
+                    showToast("Oops something went wrong");
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+    public void showToast(final String Text){
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ProfileActivity.this,
+                        Text, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 }
