@@ -121,18 +121,22 @@ public class LogInActivity extends AppCompatActivity {
                         SharedPreferences sharedPreferences11 = getSharedPreferences("bandLocation", MODE_PRIVATE);
                         SharedPreferences sharedPreferences12 = getSharedPreferences("bandGenre", MODE_PRIVATE);
                         SharedPreferences sharedPreferences13 = getSharedPreferences("bandRequests", MODE_PRIVATE);
+                        SharedPreferences sharedPreferences14 = getSharedPreferences("bandMembers", MODE_PRIVATE);
                         SharedPreferences.Editor editor10 = sharedPreferences10.edit();
                         SharedPreferences.Editor editor11 = sharedPreferences11.edit();
                         SharedPreferences.Editor editor12 = sharedPreferences12.edit();
                         SharedPreferences.Editor editor13 = sharedPreferences13.edit();
+                        SharedPreferences.Editor editor14 = sharedPreferences14.edit();
                         editor10.putString("bandDescription", results[1]);
                         editor11.putString("bandLocation", results[2]);
                         editor12.putString("bandGenre", results[3]);
                         editor13.putString("bandRequests", results[4]);
+                        editor14.putString("bandMembers", results[5]);
                         editor10.apply();
                         editor11.apply();
                         editor12.apply();
                         editor13.apply();
+                        editor14.apply();
                     }
                 }
             }catch(Exception e){

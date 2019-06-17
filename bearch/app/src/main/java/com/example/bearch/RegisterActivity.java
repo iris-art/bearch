@@ -26,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
-    String[] items;
     final String url_register = "https://joostappapi.000webhostapp.com/register_user.php";
 
     @Override
@@ -43,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         spinner2 = findViewById(R.id.spinner2);
         spinner3 = findViewById(R.id.spinner3);
         spinner4 = findViewById(R.id.spinner4);
-        items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
+        String[] items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
         String[] items1 = new String[] {"Diverse", "Classic", "Folk", "Latin", "Schlager", "Jazz", "R&B", "Rock", "Pop", "Electronic"};
         String[] items2 = new String[] {"Singer", "Accordion" , "Bagpipes" , "Banjo" , "Bass guitar" , "Bassoon" , "Berimbau" , "Bongo" , "Cello" , "Clarinet" , "Cor anglais" , "Cornet" , "Cymbal" , "Didgeridoo" , "Double bass" , "Drum kit" , "Euphonium" , "Flute" , "French horn" , "Glass harmonica" , "Glockenspiel" , "Gong" , "Guitar" , "Harmonica" , "Harp" , "Harpsichord" , "Hammered dulcimer" , "Hurdy gurdy" , "Jew’s harp" , "Kalimba" , "Lute" , "Lyre" , "Mandolin" , "Marimba" , "Melodica" , "Oboe" , "Ocarina" , "Octobass" , "Organ" , "Pan Pipes" , "Pennywhistle" , "Piano" , "Piccolo" , "Pungi" , "Recorder" , "Saxophone" , "Sitar" , "Synthesizer" , "Tambourine" , "Timpani" , "Triangle" , "Trombone" , "Trumpet" , "Theremin" , "Tuba" , "Ukulele" , "Viola" , "Violin" , "Whamola" , "Xylophone" , "Zither"};
         setAdapter(items, spinner1);
