@@ -21,9 +21,23 @@ public class bandListAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.bandlistitem, parent, false);
         }
+        String band = ListItems.get(position);
+        String[] bandPropperties = band.split("~");
+        String bandName = bandPropperties[0];
+        String bandDescription = bandPropperties[1];
+        String bandLocation = bandPropperties[2];
+        String bandGenre = bandPropperties[3];
 
+        TextView Name = convertView.findViewById(R.id.textView102);
+        TextView Location = convertView.findViewById(R.id.textView101);
+        TextView Genre = convertView.findViewById(R.id.textView100);
+        TextView Description = convertView.findViewById(R.id.textView103);
 
-        return super.getView(position, convertView, parent);
+        Name.setText(bandName);
+        Location.setText(bandLocation);
+        Genre.setText(bandGenre);
+        Description.setText(bandDescription);
+        return convertView;
     }
 
     public bandListAdapter(Context context, int resource, ArrayList<String> objects) {

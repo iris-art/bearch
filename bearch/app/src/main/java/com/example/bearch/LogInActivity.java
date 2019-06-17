@@ -113,7 +113,26 @@ public class LogInActivity extends AppCompatActivity {
                     if (result.equals("fail")){
                         Toast.makeText(LogInActivity.this, "Email or Password mismatched!", Toast.LENGTH_SHORT).show();
                     }else{
-                        Log.d("JOE", "joe");
+                        String[] results = result.split("~");
+                        for(int i=0; i <results.length;i++){
+                            Log.d("result = ", results[i]);
+                        }
+                        SharedPreferences sharedPreferences10 = getSharedPreferences("bandDescription", MODE_PRIVATE);
+                        SharedPreferences sharedPreferences11 = getSharedPreferences("bandLocation", MODE_PRIVATE);
+                        SharedPreferences sharedPreferences12 = getSharedPreferences("bandGenre", MODE_PRIVATE);
+                        SharedPreferences sharedPreferences13 = getSharedPreferences("bandRequests", MODE_PRIVATE);
+                        SharedPreferences.Editor editor10 = sharedPreferences10.edit();
+                        SharedPreferences.Editor editor11 = sharedPreferences11.edit();
+                        SharedPreferences.Editor editor12 = sharedPreferences12.edit();
+                        SharedPreferences.Editor editor13 = sharedPreferences13.edit();
+                        editor10.putString("bandDescription", results[1]);
+                        editor11.putString("bandLocation", results[2]);
+                        editor12.putString("bandGenre", results[3]);
+                        editor13.putString("bandRequests", results[4]);
+                        editor10.apply();
+                        editor11.apply();
+                        editor12.apply();
+                        editor13.apply();
                     }
                 }
             }catch(Exception e){

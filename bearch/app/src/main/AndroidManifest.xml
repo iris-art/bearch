@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".saveUser"></activity>
+        <activity android:name=".requestsActivity"></activity>
+        <activity android:name=".musicanDetail" />
+        <activity android:name=".bandDetail" />
+        <activity android:name=".saveUser" />
         <activity android:name=".logoutActivity" />
         <activity android:name=".bandResultActivity" />
         <activity android:name=".musicanResultActivity" />

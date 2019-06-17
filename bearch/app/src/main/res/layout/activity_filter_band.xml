@@ -91,22 +91,6 @@
             android:backgroundTint="#127090"
             android:spinnerMode="dropdown" />
 
-        <TextView
-            android:id="@+id/textview4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Select instrument"
-            android:textColor="#FFFFFF" />
-
-        <Spinner
-            android:id="@+id/spinner4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
-            android:spinnerMode="dropdown" />
-
         <Button
             android:id="@+id/button8"
             android:layout_width="307dp"

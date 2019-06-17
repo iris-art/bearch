@@ -37,22 +37,12 @@
             android:onClick="onClick"
             app:srcCompat="@mipmap/ic_launcher_round" />
 
-        <EditText
-            android:id="@+id/editText9"
+        <Button
+            android:id="@+id/button7"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:drawableLeft="@drawable/ic_action_name"
-            android:ems="10"
-            android:hint="email"
-            android:inputType="textPersonName"
-            android:textColorHint="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText8" />
+            android:layout_height="wrap_content"
+            android:onClick="onClick4"
+            android:text="Button" />
 
         <EditText
             android:id="@+id/editText10"
@@ -63,7 +53,6 @@
             android:layout_marginEnd="8dp"
             android:drawableLeft="@drawable/ic_action_name"
             android:ems="10"
-            android:hint="username"
             android:inputType="textPersonName"
             android:textColorHint="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,22 +102,6 @@
 
         <Spinner
             android:id="@+id/spinner3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
-            android:spinnerMode="dropdown" />
-
-        <TextView
-            android:id="@+id/textview8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Select instrument"
-            android:textColor="#FFFFFF" />
-
-        <Spinner
-            android:id="@+id/spinner4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
