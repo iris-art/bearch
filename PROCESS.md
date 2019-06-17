@@ -11,3 +11,7 @@ __12377775__
 |7-6-2019| Finished the prototype and got feedback on it. The prototype gave a clear view of what has to happen to fix the complete app| my standup colleague told that it was quite usefull and clear, the navigation could be better|
 |11-6-2019| Most of today I struggled with the getting the log in and register function to work, I had some problems with the Internet connection of the phone (I think)| We had a discussion about the API's i should use because I have to store different information than most API's do. So I have to adjust some other API's to make my app working|
 |12-6-2019| Started with adjusting the API I already found, made different SQL queries and found how to get the data from every user in the app | Not much to discuss |
+|13-6-2019|Today I came with the idea that I wanted to sent request from bands to users to join there band. Spend the whole day on figuring out a way to make that happen but in the end it seems almost impossible with a mysql database. |together with my group we made a Styleguide.md|
+|14-6-2019|Finished my alpha version, thought about how I should fix the joining a band system and found a better way, users are only allowed to make a request to join a band. Finshed a lot of API's on the server.|Showed the Alpha version with the standup team.|
+|17-6-2019|||
+|18-6-2019|||
