@@ -3,6 +3,7 @@ package com.example.bearch;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +12,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class bandActivity extends AppCompatActivity {
 
@@ -22,6 +29,15 @@ public class bandActivity extends AppCompatActivity {
     Button button;
     ImageView imageView;
     Integer nrCity;
+    String band;
+    String bandGenre;
+    String bandLocation;
+    TextView bandName;
+    EditText bandDescription;
+    Spinner spinner1;
+    Spinner spinner3;
+    Spinner spinner2;
+    String BandDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,17 +46,21 @@ public class bandActivity extends AppCompatActivity {
         String [] items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
         String[] items1 = new String[] {"Diverse", "Classic", "Folk", "Latin", "Schlager", "Jazz", "R&B", "Rock", "Pop", "Electronic"};
         SharedPreferences sharedPreferences=getSharedPreferences("Band",MODE_PRIVATE);
-        String band = sharedPreferences.getString("Band", "None");
+        band = sharedPreferences.getString("Band", "None");
         SharedPreferences sharedPreferences1=getSharedPreferences("bandGenre",MODE_PRIVATE);
         String bandGenre = sharedPreferences1.getString("bandGenre", "None");
         SharedPreferences sharedPreferences2=getSharedPreferences("bandLocation",MODE_PRIVATE);
         String bandLocation = sharedPreferences2.getString("bandLocation", "None");
-        TextView bandName = findViewById(R.id.editText10);
-        Log.d("RESULT + + =", bandGenre + bandLocation);
+        SharedPreferences sharedPreferences3=getSharedPreferences("bandDescription",MODE_PRIVATE);
+        BandDescription = sharedPreferences3.getString("bandDescription", "None");
+        bandName = findViewById(R.id.editText10);
+        bandDescription = findViewById(R.id.editText);
+        bandDescription.setText(BandDescription);
+
         bandName.setText(band);
-        Spinner spinner1 = findViewById(R.id.spinner1);
-        Spinner spinner2 = findViewById(R.id.spinner2);
-        Spinner spinner3 = findViewById(R.id.spinner3);
+        spinner1 = findViewById(R.id.spinner1);
+        spinner2 = findViewById(R.id.spinner2);
+        spinner3 = findViewById(R.id.spinner3);
         setAdapter(items, spinner1);
         setAdapter(items1, spinner3);
         for (int i = 0; i < items.length; i ++){
@@ -85,6 +105,11 @@ public class bandActivity extends AppCompatActivity {
         Intent intent = new Intent(this, requestsActivity.class);
         startActivity(intent);
     }
+    public void onClick5(View view){
+        Intent intent = new Intent(this, memberActivity.class);
+        startActivity(intent);
+    }
+
     public String[] getCities(String Region){
         if (Region == "Limburg"){
             String[] items = new String[] {"Ambt Montfort","Arcen en Velden","Beek","Beesel","Bergen","Brunssum","Echt-Susteren","Eijsden","Gennep","Gulpen-Wittem","Haelen","Heel","Heerlen","Helden","Heythuysen","Horst aan de Maas","Hunsel","Kerkrad","Eijsden","Gennep","Gulpen-Wittem","Haelen","Heel","Heerlen","Helden","Heythuysen","Houm","Meerssen","Meijel","Mook en Middelaar","Nederweert","Nuth","Onderbanken","Roerdalen","Roermond","Roggel en Neer","Srst aan de Maas","Hunsel","Kerkrade","Kessel","Landgraaf","Maasbracht","Maasbree","Maalkenburg aan de Geul","Venlo","Venray","Voerendaal","Weert","stricht","Margraten","Meerlo-Wanssum","Meerssen","Meijel","Mook en Middelaar","Nederweert","Nuth","Onderbanken","Roerdalen","Roermond","Roggel en Neer","Schinnen","Sevenum","Simpelveld","Sittard-Geleen","Stein","Swalmen","Thorn","Vaals","Valkenburg aan de Geul","Venlo","Venray","Voerendaal","Weert"};
@@ -156,5 +181,58 @@ public class bandActivity extends AppCompatActivity {
             imageURI = data.getData();
             imageView.setImageURI(imageURI);
         }
+    }
+    public void onClick1(View view){
+
+        bandLocation = spinner2.getSelectedItem().toString();
+        bandGenre = spinner3.getSelectedItem().toString();
+        BandDescription = bandDescription.getText().toString();
+        new SaveBand().execute(bandName.getText().toString(), bandGenre, bandLocation, BandDescription);
+    }
+    public class SaveBand extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            String Name = strings[0];
+            String Genre = strings[1];
+            String Location = strings[2];
+            String Description = strings[3];
+            Log.d("BANDNAME = ", Description);
+            String finalURL = "http://10.0.2.2/api/save_band.php" + "?band_name1="+ Name +
+                    "&band_name="+ band +
+                    "&band_location=" + Location +
+                    "&band_genre=" + Genre +
+                    "&band_description=" + Description;
+
+            band = bandName.getText().toString();
+            OkHttpClient okHttpClient = new OkHttpClient();
+            Request request =  new Request.Builder()
+                    .url(finalURL)
+                    .get()
+                    .build();
+            Response response = null;
+            try{
+                response = okHttpClient.newCall(request).execute();
+                String result = response.body().string();
+                Log.d("RESULTTTTT = ", result);
+                if (response.isSuccessful()){
+                    showToast("Band Updated succesfully");
+                }else{
+                    showToast("Oops something went wrong");
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+    public void showToast(final String Text){
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(bandActivity.this,
+                        Text, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

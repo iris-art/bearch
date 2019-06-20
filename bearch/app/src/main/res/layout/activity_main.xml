@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#107896"
+    android:background="@drawable/background"
+    android:isScrollContainer="true"
     tools:context=".MainActivity">
 
 
@@ -18,7 +18,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:background="#127090"
+        android:fontFamily="sans-serif-condensed-light"
         android:onClick="onClick2"
         android:text="Search bands"
         android:textColor="#FFFFFF"
@@ -36,7 +36,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:background="#127090"
+        android:fontFamily="sans-serif-condensed-light"
         android:onClick="onClick3"
         android:text="search musicans"
         android:textColor="#FFFFFF"
@@ -54,7 +54,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:background="#127090"
+        android:fontFamily="sans-serif-condensed-light"
         android:onClick="onClick1"
         android:text="Create your band"
         android:textAlignment="gravity"
@@ -87,8 +87,9 @@
             android:layout_marginTop="44dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:background="#127090"
+            android:background="?android:attr/panelBackground"
             android:clickable="false"
+            android:fontFamily="sans-serif-condensed-light"
             android:onClick="onClick6"
             android:text="Account"
             android:textColor="#FFFFFF"
@@ -102,8 +103,9 @@
             android:layout_marginTop="44dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:background="#127090"
+            android:background="?android:attr/panelBackground"
             android:clickable="false"
+            android:fontFamily="sans-serif-condensed-light"
             android:onClick="onClick7"
             android:text="Log out"
             android:textColor="#FFFFFF"
@@ -129,7 +131,8 @@
             android:layout_width="128dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#127090"
+            android:background="?android:attr/panelBackground"
+            android:fontFamily="sans-serif-condensed-light"
             android:onClick="onClick4"
             android:text="Log In"
             android:textColor="#FFFFFF"
@@ -140,10 +143,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#127090"
+            android:background="?android:attr/panelBackground"
+            android:fontFamily="sans-serif-condensed-light"
             android:onClick="onClick5"
             android:text="Register"
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

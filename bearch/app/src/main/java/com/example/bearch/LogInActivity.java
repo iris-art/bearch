@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,7 +25,7 @@ public class LogInActivity extends AppCompatActivity {
 
     String stEmail;
     String stPassword;
-    final static String url_login = "https://joostappapi.000webhostapp.com/login_user.php";
+    final static String url_login = "http://10.0.2.2/api/login_user.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,10 @@ public class LogInActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             String email = strings[0];
             String password = strings[1];
-            OkHttpClient okHttpClient = new OkHttpClient();
+            OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                    .connectTimeout(100, TimeUnit.SECONDS)
+                    .writeTimeout(100, TimeUnit.SECONDS)
+                    .readTimeout(300, TimeUnit.SECONDS).build();
             RequestBody formBody = new FormBody.Builder()
                     .add("user_id", email)
                     .add("user_password", password)
@@ -70,7 +75,7 @@ public class LogInActivity extends AppCompatActivity {
                         Toast.makeText(LogInActivity.this, "Email or Password mismatched!", Toast.LENGTH_SHORT).show();
                     }else{
                         String[] string = result.split("~");
-                        saveUserInformation(string[1], string[0], string[3], string[2], string[5], string[4]);
+                        saveUserInformation(string[1], string[0], string[3], string[2], string[5], string[4], string[6]);
                         Log.d("Band = ", string[4]);
                         for (int i = 0; i < string.length; i++){
                             Log.d("INFORMATION = ", string[i]);
@@ -95,13 +100,17 @@ public class LogInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             String bandName = strings[0];
-            OkHttpClient okHttpClient = new OkHttpClient();
+            OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                    .connectTimeout(100, TimeUnit.SECONDS)
+                    .writeTimeout(100, TimeUnit.SECONDS)
+                    .readTimeout(300, TimeUnit.SECONDS).build();
 
-            String url_band = "https://joostappapi.000webhostapp.com/read_bands.php" + "?band_name="
+            String url_band = "http://10.0.2.2/api/read_bands.php" + "?band_name="
                     + bandName;
             Request request = new Request.Builder()
                     .url(url_band)
                     .build();
+
             Response response = null;
 
             try{
@@ -122,11 +131,13 @@ public class LogInActivity extends AppCompatActivity {
                         SharedPreferences sharedPreferences12 = getSharedPreferences("bandGenre", MODE_PRIVATE);
                         SharedPreferences sharedPreferences13 = getSharedPreferences("bandRequests", MODE_PRIVATE);
                         SharedPreferences sharedPreferences14 = getSharedPreferences("bandMembers", MODE_PRIVATE);
+                        SharedPreferences sharedPreferences15=getSharedPreferences("BandImageURI",MODE_PRIVATE);
                         SharedPreferences.Editor editor10 = sharedPreferences10.edit();
                         SharedPreferences.Editor editor11 = sharedPreferences11.edit();
                         SharedPreferences.Editor editor12 = sharedPreferences12.edit();
                         SharedPreferences.Editor editor13 = sharedPreferences13.edit();
                         SharedPreferences.Editor editor14 = sharedPreferences14.edit();
+                        SharedPreferences.Editor editor15 = sharedPreferences15.edit();
                         editor10.putString("bandDescription", results[1]);
                         editor11.putString("bandLocation", results[2]);
                         editor12.putString("bandGenre", results[3]);
@@ -145,7 +156,7 @@ public class LogInActivity extends AppCompatActivity {
             return null;
         }
     }
-    public void saveUserInformation(String Name, String Email, String Genre, String Instrument, String Location, String Band){
+    public void saveUserInformation(String Name, String Email, String Genre, String Instrument, String Location, String Band, String imageURI){
         Log.d("ITEMS = ", Instrument + Genre);
         SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
         SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
@@ -153,6 +164,7 @@ public class LogInActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences3=getSharedPreferences("Instrument",MODE_PRIVATE);
         SharedPreferences sharedPreferences4=getSharedPreferences("Location",MODE_PRIVATE);
         SharedPreferences sharedPreferences5=getSharedPreferences("Band",MODE_PRIVATE);
+        SharedPreferences sharedPreferences6=getSharedPreferences("ImageURI",MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
@@ -160,6 +172,7 @@ public class LogInActivity extends AppCompatActivity {
         SharedPreferences.Editor editor3 = sharedPreferences3.edit();
         SharedPreferences.Editor editor4 = sharedPreferences4.edit();
         SharedPreferences.Editor editor5 = sharedPreferences5.edit();
+        SharedPreferences.Editor editor6 = sharedPreferences6.edit();
 
         editor.putString("Name",Name);
         editor1.putString("Email",Email);
@@ -167,6 +180,7 @@ public class LogInActivity extends AppCompatActivity {
         editor3.putString("Instrument",Instrument);
         editor4.putString("Location",Location);
         editor5.putString("Band",Band);
+        editor6.putString("ImageURI",imageURI);
 
         editor.apply();
         editor1.apply();
@@ -174,5 +188,6 @@ public class LogInActivity extends AppCompatActivity {
         editor3.apply();
         editor4.apply();
         editor5.apply();
+        editor6.apply();
     }
 }

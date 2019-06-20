@@ -42,10 +42,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClick4"
-            android:text="Button" />
+            android:text="see requests" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick5"
+            android:text="see members" />
 
         <EditText
             android:id="@+id/editText10"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:drawableLeft="@drawable/ic_action_name"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColorHint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <EditText
+            android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
@@ -116,7 +139,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="#127090"
-            android:onClick="onClick"
+            android:onClick="onClick1"
             android:text="Save"
             android:textColor="#FFFFFF"
             android:textSize="30sp"

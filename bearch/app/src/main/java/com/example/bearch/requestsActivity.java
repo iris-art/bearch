@@ -35,6 +35,7 @@ public class requestsActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences1 = getSharedPreferences("bandMembers", MODE_PRIVATE);
         bandMembers = sharedPreferences1.getString("bandMembers", "None");
         String[] results = bandRequests.split("<>");
+        Log.d("results =" , "joe" + bandRequests);
         for(int i=0;i<results.length;i++) {
             list.add(results[i]);
         }
@@ -89,7 +90,7 @@ public class requestsActivity extends AppCompatActivity {
             String Band = strings[1];
             String string = strings[2];
             String string1 = strings[3];
-            String finalURL = "https://joostappapi.000webhostapp.com/accept_request.php" +
+            String finalURL = "http://10.0.2.2/api/accept_request.php" +
                     "?user_id=" + Email +
                     "&band_name=" + Band +
                     "&string="+ string +

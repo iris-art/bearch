@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -30,7 +31,7 @@ public class musicanResultActivity extends AppCompatActivity {
     String region;
     String[] items;
 
-    final static String url_users = "https://joostappapi.000webhostapp.com/read_users.php";
+    final static String url_users = "http://10.0.2.2/api/read_users.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,10 @@ public class musicanResultActivity extends AppCompatActivity {
     public class GetUsers extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            OkHttpClient okHttpClient = new OkHttpClient();
+            OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                    .connectTimeout(100, TimeUnit.SECONDS)
+                    .writeTimeout(100, TimeUnit.SECONDS)
+                    .readTimeout(300, TimeUnit.SECONDS).build();
             RequestBody formBody = new FormBody.Builder()
                     .build();
             Request request = new Request.Builder()

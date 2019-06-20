@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -25,7 +26,7 @@ public class bandResultActivity extends AppCompatActivity {
     String city;
     String region;
     String[] items;
-    final static String url_bands = "https://joostappapi.000webhostapp.com/read_bands.php?band_name=None";
+    final static String url_bands = "http://10.0.2.2/api/read_bands.php?band_name=None";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,10 @@ public class bandResultActivity extends AppCompatActivity {
     public class getBands extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            OkHttpClient okHttpClient = new OkHttpClient();
+            OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                    .connectTimeout(100, TimeUnit.SECONDS)
+                    .writeTimeout(100, TimeUnit.SECONDS)
+                    .readTimeout(300, TimeUnit.SECONDS).build();
             RequestBody formBody = new FormBody.Builder()
                     .build();
             Request request = new Request.Builder()

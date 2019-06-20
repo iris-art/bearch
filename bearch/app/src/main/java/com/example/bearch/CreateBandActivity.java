@@ -22,6 +22,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -131,14 +132,17 @@ public class CreateBandActivity extends AppCompatActivity {
             String Description = strings[1];
             SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
             String Email = sharedPreferences1.getString("Email", "None");
-            String finalURL = "https://joostappapi.000webhostapp.com/create_band.php" + "?band_name="+ Name +
+            String finalURL = "http://10.0.2.2/api/create_band.php" + "?band_name="+ Name +
                     "&band_description=" + Description
                     + "&user_id=" + Email
                     + "&band_location=" + spinner2.getSelectedItem().toString()
                     + "&band_genre=" + spinner3.getSelectedItem().toString();
 
             Log.d("results= ", "'" +finalURL+ "'");
-            OkHttpClient okHttpClient = new OkHttpClient();
+            OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                    .connectTimeout(100, TimeUnit.SECONDS)
+                    .writeTimeout(100, TimeUnit.SECONDS)
+                    .readTimeout(300, TimeUnit.SECONDS).build();
             Request request =  new Request.Builder()
                     .url(finalURL)
                     .get()

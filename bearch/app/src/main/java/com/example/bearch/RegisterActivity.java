@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
-    final String url_register = "https://joostappapi.000webhostapp.com/register_user.php";
+    final String url_register = "http://10.0.2.2/api/register_user.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

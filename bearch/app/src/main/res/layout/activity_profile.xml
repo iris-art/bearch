@@ -3,54 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#127090"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    >
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#127090"
-        android:backgroundTint="#127090"
+        android:layout_height="fill_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="117dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="My Profile"
-            android:textColor="#FFFFFF"
-            android:textSize="50sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView4"
-            android:layout_width="363dp"
-            android:layout_height="235dp"
+            android:layout_width="116dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:onClick="onClick1"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:scrollY="-25dp"
+            android:src="@drawable/background"
+            app:civ_border_width="2dp" />
 
-        <Button
-            android:id="@+id/button10"
+        <TextView
+            android:id="@+id/textview9"
             android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="#127090"
-            android:onClick="onClick"
-            android:text="My Band"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="email:"
             android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editText9"
@@ -63,11 +43,23 @@
             android:ems="10"
             android:hint="email"
             android:inputType="textPersonName"
+            android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText8" />
+
+        <TextView
+            android:id="@+id/textview10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="username:"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editText10"
@@ -80,7 +72,9 @@
             android:ems="10"
             android:hint="username"
             android:inputType="textPersonName"
+            android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,15 +85,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Select Region "
-            android:textColor="#FFFFFF" />
+            android:text="Province:"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
         <Spinner
             android:id="@+id/spinner1"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
             android:spinnerMode="dialog" />
 
         <TextView
@@ -107,15 +100,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Select nearest city "
-            android:textColor="#FFFFFF" />
+            android:text="City:"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
             android:spinnerMode="dropdown" />
 
         <TextView
@@ -123,15 +115,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Select music style"
-            android:textColor="#FFFFFF" />
+            android:text="Genre:"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
         <Spinner
             android:id="@+id/spinner3"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
             android:spinnerMode="dropdown" />
 
         <TextView
@@ -139,15 +130,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Select instrument"
-            android:textColor="#FFFFFF" />
+            android:text="Instrument:"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
         <Spinner
             android:id="@+id/spinner4"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
             android:spinnerMode="dropdown" />
 
         <Button
@@ -157,7 +147,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="#127090"
             android:onClick="onClick"
             android:text="Save"
             android:textColor="#FFFFFF"

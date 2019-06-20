@@ -2,6 +2,7 @@ package com.example.bearch;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -85,10 +86,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick6(View view){
         Intent intent = new Intent(this, ProfileActivity.class);
+        SharedPreferences sharedPreferences5=getSharedPreferences("ImageURI",MODE_PRIVATE);
+        String ImageURI =sharedPreferences5.getString("ImageURI","None");
+        intent.setData(Uri.parse(ImageURI));
         startActivity(intent);
     }
     public void onClick7(View view){
         Intent intent = new Intent(this, logoutActivity.class);
         startActivity(intent);
     }
+
+
 }
