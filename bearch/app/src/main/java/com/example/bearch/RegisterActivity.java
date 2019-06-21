@@ -23,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText etName, etEmail, etPassword, etPassword1;
     Button btnRegister;
+    Spinner spinner1;
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
@@ -38,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword1 = findViewById(R.id.editText7);
 
         btnRegister = findViewById(R.id.button8);
-        Spinner spinner1 = findViewById(R.id.spinner1);
+        spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);
         spinner3 = findViewById(R.id.spinner3);
         spinner4 = findViewById(R.id.spinner4);
@@ -117,10 +118,11 @@ public class RegisterActivity extends AppCompatActivity {
         String Name = etName.getText().toString();
         String Email = etEmail.getText().toString();
         String Password = etPassword.getText().toString();
+        String Province = spinner1.getSelectedItem().toString();
         String Location = spinner2.getSelectedItem().toString();
         String Genre = spinner3.getSelectedItem().toString();
         String Instrument = spinner4.getSelectedItem().toString();
-        new RegisterUser().execute(Name, Email, Password, Location, Genre, Instrument);
+        new RegisterUser().execute(Name, Email, Password, Location, Genre, Instrument, Province);
     }
 
 
@@ -133,6 +135,8 @@ public class RegisterActivity extends AppCompatActivity {
             String Location = strings[3];
             String Genre = strings[4];
             String Instrument = strings[5];
+            String Province = strings[6];
+
             Log.d("INSTRUMENT = ", Instrument);
             System.out.println(Name + Email + Password);
             String finalURL = url_register + "?user_name="+ Name +
@@ -140,7 +144,8 @@ public class RegisterActivity extends AppCompatActivity {
                     "&user_password=" + Password +
                     "&user_location=" + Location +
                     "&user_instrument=" + Instrument +
-                    "&user_genre=" + Genre;
+                    "&user_genre=" + Genre +
+                    "&user_province=" + Province;
 
             Log.d("URL = ", finalURL);
             OkHttpClient okHttpClient = new OkHttpClient();

@@ -3,6 +3,8 @@ package com.example.bearch;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
@@ -17,7 +19,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
@@ -31,8 +36,8 @@ import okhttp3.Response;
 public class ProfileActivity extends AppCompatActivity {
 
     Button btnSave;
-    EditText name;
-    EditText email;
+    TextView name;
+    TextView email;
     Spinner spinner1;
     Spinner spinner2;
     Spinner spinner3;
@@ -59,14 +64,23 @@ public class ProfileActivity extends AppCompatActivity {
         String Instrument =sharedPreferences3.getString("Instrument","None");
         SharedPreferences sharedPreferences4=getSharedPreferences("Location",MODE_PRIVATE);
         String Location =sharedPreferences4.getString("Location","None");
+        SharedPreferences sharedPreferences5=getSharedPreferences("ImageURI",MODE_PRIVATE);
+        encodeImage =sharedPreferences5.getString("ImageURI","None");
 
-        Intent intent = getIntent();
         imageView = findViewById(R.id.imageView4);
-        System.out.println(intent.getData());
-        getWindow().setBackgroundDrawableResource(R.drawable.background4);
+        if(encodeImage.length() > 10){
+            try {
+                byte [] encodeByte=Base64.decode(encodeImage,Base64.DEFAULT);
+                Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                imageView.setImageBitmap(bitmap);
+            } catch(Exception e) {
+                e.getMessage();
+            }
+        }
+        ProfileActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background4);
 
-        name = findViewById(R.id.editText10);
-        email = findViewById(R.id.editText9);
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
 
         name.setText(Name);
         email.setText(Email);
@@ -172,7 +186,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void onClick(View view){
         new SaveUser().execute(name.getText().toString(),
-                email.getText().toString(), spinner2.getSelectedItem().toString(), spinner3.getSelectedItem().toString(), spinner4.getSelectedItem().toString(), Email);
+                email.getText().toString(), spinner2.getSelectedItem().toString(), spinner3.getSelectedItem().toString(), spinner4.getSelectedItem().toString(), Email, spinner2.getSelectedItem().toString());
     }
 
     public void onClick1(View view){
@@ -188,11 +202,12 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+
             imageURI = data.getData();
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageURI);
-                encodeImage = BitMapToString(bitmap);
-                Log.d("Image =", encodeImage);
+                Bitmap resized = getResizedBitmap(bitmap,1000,1500);
+                encodeImage = BitMapToString(resized);
                 imageView.setImageBitmap(bitmap);
             }catch(Exception e){
                 e.printStackTrace();
@@ -202,28 +217,77 @@ public class ProfileActivity extends AppCompatActivity {
 
     public String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,10, baos);
         byte [] b=baos.toByteArray();
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
     }
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+        int width = bm.getWidth();
+        System.out.println(width);
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // recreate the new Bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
+    }
     public class SaveUser extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
+            SharedPreferences sharedPreferences6=getSharedPreferences("ImageURI",MODE_PRIVATE);
+            SharedPreferences.Editor editor6 = sharedPreferences6.edit();
+            editor6.putString("ImageURI",encodeImage);
+            editor6.apply();
             String Name = strings[0];
             String Email = strings[1];
             String Location = strings[2];
             String Genre = strings[3];
             String Instrument = strings[4];
             String Email1 = strings[5];
+            String Province = strings[6];
             Log.d("INSTRUMENT = ", Instrument);
             String finalURL = "http://10.0.2.2/api/save_user.php" + "?user_name="+ Name +
                     "&user_id1=" + Email1 +
                     "&user_id=" + Email +
                     "&user_location=" + Location +
                     "&user_instrument=" + Instrument +
-                    "&user_genre=" + Genre;
+                    "&user_genre=" + Genre +
+                    "&user_province=" + Province;
+            SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
+            SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
+            SharedPreferences sharedPreferences2=getSharedPreferences("Genre",MODE_PRIVATE);
+            SharedPreferences sharedPreferences3=getSharedPreferences("Instrument",MODE_PRIVATE);
+            SharedPreferences sharedPreferences4=getSharedPreferences("Location",MODE_PRIVATE);
+            SharedPreferences sharedPreferences7=getSharedPreferences("Province",MODE_PRIVATE);
 
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+            SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+            SharedPreferences.Editor editor3 = sharedPreferences3.edit();
+            SharedPreferences.Editor editor4 = sharedPreferences4.edit();
+            SharedPreferences.Editor editor7 = sharedPreferences7.edit();
+
+            editor.putString("Name",Name);
+            editor1.putString("Email",Email);
+            editor2.putString("Genre",Genre);
+            editor3.putString("Instrument",Instrument);
+            editor4.putString("Location",Location);
+            editor7.putString("Province",Province);
+            editor.apply();
+            editor1.apply();
+            editor2.apply();
+            editor3.apply();
+            editor4.apply();
+            editor7.apply();
             Log.d("URL = ", Name + Email + Location + Genre + Instrument);
             OkHttpClient okHttpClient = new OkHttpClient();
             RequestBody formBody = new FormBody.Builder()

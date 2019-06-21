@@ -40,6 +40,7 @@ public class bandResultActivity extends AppCompatActivity {
         city = intent.getStringExtra("city");
         region = intent.getStringExtra("region");
         items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
+
         new getBands().execute();
     }
 

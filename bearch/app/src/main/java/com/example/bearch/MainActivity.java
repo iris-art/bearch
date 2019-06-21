@@ -41,26 +41,35 @@ public class MainActivity extends AppCompatActivity {
             btnLogout.setClickable(true);
             btnLogout.setVisibility(View.VISIBLE);
         }
-        Log.d("Band = ", Band);
-        if (!Band.equals("None")) {
+        try{
+            String[] band = Band.split("%");
+            Log.d("BAND = ", Band);
+            btnCreate.setText("Request to:" + band[1]);
+            btnCreate.setClickable(false);
+        }catch(Exception e){
+            e.printStackTrace();
+            if (!Band.equals("None")) {
 
-            btnCreate.setVisibility(View.VISIBLE);
-            btnCreate.setClickable(true);
-            btnCreate.setText("My band");
-            btnCreate.setOnClickListener(new View.OnClickListener(){
+                btnCreate.setVisibility(View.VISIBLE);
+                btnCreate.setClickable(true);
+                btnCreate.setText("My band");
+                btnCreate.setOnClickListener(new View.OnClickListener(){
 
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, bandActivity.class);
-                    startActivity(intent);
-                }
-            });
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, bandActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
+
 
     }
 
     public void onClick1(View view){
         Intent intent = new Intent(this, CreateBandActivity.class);
+
         startActivity(intent);
     }
 
@@ -86,9 +95,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick6(View view){
         Intent intent = new Intent(this, ProfileActivity.class);
-        SharedPreferences sharedPreferences5=getSharedPreferences("ImageURI",MODE_PRIVATE);
-        String ImageURI =sharedPreferences5.getString("ImageURI","None");
-        intent.setData(Uri.parse(ImageURI));
         startActivity(intent);
     }
     public void onClick7(View view){

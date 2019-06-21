@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class musicanListAdapter extends ArrayAdapter<String> {
@@ -23,13 +25,33 @@ public class musicanListAdapter extends ArrayAdapter<String> {
         TextView Genre = convertView.findViewById(R.id.textView100);
         TextView Instrument = convertView.findViewById(R.id.textView103);
 
-        String user = ListItems.get(position);
-        String[] properties = user.split("~");
 
-        Name.setText(properties[1]);
-        Location.setText(properties[2]);
-        Genre.setText(properties[4]);
-        Instrument.setText(properties[5]);
+        String province = null;
+        String imageURI = null;
+        String genre = null;
+        String band = null;
+        String instrument = null;
+        String location = null;
+        String email = null;
+        String name = null;
+        try{
+            String user = ListItems.get(position);
+            JSONObject Jobject = new JSONObject(user);
+
+            name = Jobject.getString("name");
+            email = Jobject.getString("email");
+            location = Jobject.getString("location");
+            band = Jobject.getString("band");
+            instrument = Jobject.getString("instrument");
+            genre = Jobject.getString("genre");
+            province = Jobject.getString("province");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        Name.setText(name);
+        Location.setText(location);
+        Genre.setText(genre);
+        Instrument.setText(instrument);
 
         return convertView;
     }

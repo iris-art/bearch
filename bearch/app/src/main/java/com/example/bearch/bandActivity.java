@@ -2,11 +2,15 @@ package com.example.bearch;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,8 +22,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class bandActivity extends AppCompatActivity {
@@ -33,16 +41,19 @@ public class bandActivity extends AppCompatActivity {
     String bandGenre;
     String bandLocation;
     TextView bandName;
-    EditText bandDescription;
+    TextView bandDescription;
     Spinner spinner1;
     Spinner spinner3;
     Spinner spinner2;
     String BandDescription;
+    String encodeImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band);
         imageView = findViewById(R.id.imageView4);
+        bandActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.band_background);
         String [] items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
         String[] items1 = new String[] {"Diverse", "Classic", "Folk", "Latin", "Schlager", "Jazz", "R&B", "Rock", "Pop", "Electronic"};
         SharedPreferences sharedPreferences=getSharedPreferences("Band",MODE_PRIVATE);
@@ -53,10 +64,22 @@ public class bandActivity extends AppCompatActivity {
         String bandLocation = sharedPreferences2.getString("bandLocation", "None");
         SharedPreferences sharedPreferences3=getSharedPreferences("bandDescription",MODE_PRIVATE);
         BandDescription = sharedPreferences3.getString("bandDescription", "None");
-        bandName = findViewById(R.id.editText10);
-        bandDescription = findViewById(R.id.editText);
+        bandName = findViewById(R.id.name);
+        bandDescription = findViewById(R.id.description);
         bandDescription.setText(BandDescription);
+        SharedPreferences sharedPreferences5=getSharedPreferences("BandImageURI",MODE_PRIVATE);
+        encodeImage =sharedPreferences5.getString("BandImageURI","None");
 
+        imageView = findViewById(R.id.imageView4);
+        if(encodeImage.length() > 10){
+            try {
+                byte [] encodeByte=Base64.decode(encodeImage,Base64.DEFAULT);
+                Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                imageView.setImageBitmap(bitmap);
+            } catch(Exception e) {
+                e.getMessage();
+            }
+        }
         bandName.setText(band);
         spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);
@@ -179,8 +202,39 @@ public class bandActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageURI = data.getData();
-            imageView.setImageURI(imageURI);
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageURI);
+                Bitmap resized = getResizedBitmap(bitmap,1500,2500);
+                encodeImage = BitMapToString(resized);
+                imageView.setImageBitmap(bitmap);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
+    }
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,10, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // recreate the new Bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
     }
     public void onClick1(View view){
 
@@ -192,6 +246,10 @@ public class bandActivity extends AppCompatActivity {
     public class SaveBand extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
+            SharedPreferences sharedPreferences6=getSharedPreferences("BandImageURI",MODE_PRIVATE);
+            SharedPreferences.Editor editor6 = sharedPreferences6.edit();
+            editor6.putString("BandImageURI",encodeImage);
+            editor6.apply();
             String Name = strings[0];
             String Genre = strings[1];
             String Location = strings[2];
@@ -202,12 +260,27 @@ public class bandActivity extends AppCompatActivity {
                     "&band_location=" + Location +
                     "&band_genre=" + Genre +
                     "&band_description=" + Description;
-
+            SharedPreferences sharedPreferences10 = getSharedPreferences("bandDescription", MODE_PRIVATE);
+            SharedPreferences sharedPreferences11 = getSharedPreferences("bandLocation", MODE_PRIVATE);
+            SharedPreferences sharedPreferences12 = getSharedPreferences("bandGenre", MODE_PRIVATE);
+            SharedPreferences.Editor editor10 = sharedPreferences10.edit();
+            SharedPreferences.Editor editor11 = sharedPreferences11.edit();
+            SharedPreferences.Editor editor12 = sharedPreferences12.edit();
+            editor10.putString("bandDescription", Description);
+            editor11.putString("bandLocation", Location);
+            editor12.putString("bandGenre", Genre);
+            editor10.apply();
+            editor11.apply();
+            editor12.apply();
             band = bandName.getText().toString();
             OkHttpClient okHttpClient = new OkHttpClient();
+            RequestBody formBody = new FormBody.Builder()
+                    .add("image_uri", encodeImage)
+                    .build();
             Request request =  new Request.Builder()
                     .url(finalURL)
                     .get()
+                    .post(formBody)
                     .build();
             Response response = null;
             try{

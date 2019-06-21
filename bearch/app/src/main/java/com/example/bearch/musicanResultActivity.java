@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -25,10 +27,10 @@ public class musicanResultActivity extends AppCompatActivity {
     ArrayList<String> MusicanResults;
     String stEmail;
     String stPassword;
-    String instrument;
-    String genre;
-    String city;
-    String region;
+    String instrument_filter;
+    String genre_filter;
+    String city_filter;
+    String region_filter;
     String[] items;
 
     final static String url_users = "http://10.0.2.2/api/read_users.php";
@@ -41,10 +43,10 @@ public class musicanResultActivity extends AppCompatActivity {
         nListView.setOnItemClickListener(new GridItemClickListener());
         MusicanResults = new ArrayList<>();
         Intent intent = getIntent();
-        instrument = intent.getStringExtra("instrument");
-        genre = intent.getStringExtra("genre");
-        city = intent.getStringExtra("city");
-        region = intent.getStringExtra("region");
+        instrument_filter = intent.getStringExtra("instrument");
+        genre_filter = intent.getStringExtra("genre");
+        city_filter = intent.getStringExtra("city");
+        region_filter = intent.getStringExtra("region");
         items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
         new GetUsers().execute();
 
@@ -70,38 +72,52 @@ public class musicanResultActivity extends AppCompatActivity {
 
                 if(response.isSuccessful()){
                     String result = response.body().string();
-                    String[] results = result.split("%");
-                    for(int i = 0; i < results.length;i++){
-                        String[] user = results[i].split("~");
-                        for(int j = 0 ; j < user.length; j ++){
+                    Log.d("result =", result);
+                    String[] results = result.split("~");
+                    for(int i = 0; i < results.length;i++) {
+                        String province = null;
+                        String imageURI = null;
+                        String genre = null;
+                        String band = null;
+                        String instrument = null;
+                        String location = null;
+                        String email = null;
+                        String name = null;
 
+                        try {
+                            JSONObject Jobject = new JSONObject(results[i]);
+                            name = Jobject.getString("name");
+                            email = Jobject.getString("email");
+                            location = Jobject.getString("location");
+                            band = Jobject.getString("band");
+                            instrument = Jobject.getString("instrument");
+                            genre = Jobject.getString("genre");
+                            province = Jobject.getString("province");
+                            Log.d("JOE?", province);
+                        }catch(Exception e){
+                            e.printStackTrace();
                         }
-                        String region1 = null;
-                        for (int k=0; k<items.length;k++){
-                            String [] cities = getCities(items[k]);
-                            for (int l = 0; l < cities.length; l++){
-                                if (cities[l].equals(user[2])){
-                                    region1 = items[k];
+
+                    if (region_filter.equals("All") || region_filter.equals(province)){
+                        if (city_filter.equals("All") || location.equals(city_filter)){
+                            if (genre_filter.equals("Diverse") || genre.equals(genre_filter)){
+                                if (instrument_filter.equals("All") || instrument.equals(instrument_filter)){
+                                    MusicanResults.add(results[i]);
 
                                 }
                             }
                         }
-                        Log.d("results", user[4] + instrument);
-                        if (region.equals("All") || region.equals(region1)){
-                            if (city.equals("All") || user[2].equals(city)){
-                                if (genre.equals("Diverse") || user[5].equals(genre)){
-                                    if (instrument.equals("All") || user[4].equals(instrument)){
-                                        MusicanResults.add(results[i]);
-                                    }
-                                }
-                            }
-                        }
+                    }
 
                     }
                     runOnUiThread(new Runnable(){
                         @Override
                         public void run() {
-                            nListView.setAdapter(new musicanListAdapter(musicanResultActivity.this, 0, MusicanResults));
+                            if(MusicanResults.size() > 0){
+                                nListView.setAdapter(new musicanListAdapter(musicanResultActivity.this, 0, MusicanResults));
+                            }
+
+
                         }
                     });
 

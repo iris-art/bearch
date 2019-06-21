@@ -75,13 +75,21 @@ public class LogInActivity extends AppCompatActivity {
                         Toast.makeText(LogInActivity.this, "Email or Password mismatched!", Toast.LENGTH_SHORT).show();
                     }else{
                         String[] string = result.split("~");
-                        saveUserInformation(string[1], string[0], string[3], string[2], string[5], string[4], string[6]);
-                        Log.d("Band = ", string[4]);
                         for (int i = 0; i < string.length; i++){
-                            Log.d("INFORMATION = ", string[i]);
+                            Log.d("INFORMATION = ", i + string[i]);
                         }
-                        if (!string[4].equals("None")){
-                            new getBandInformation().execute(string[4]);
+                        String encodeImage;
+                        try{
+                            encodeImage = string[0];
+                            Log.d("econdeImage", encodeImage);
+                        }catch(Exception e){
+                            encodeImage = " ";
+                        }
+                        saveUserInformation(string[2], string[1], string[4], string[3], string[6], string[5], encodeImage, string[6]);
+
+
+                        if (!string[5].equals("None")){
+                            new getBandInformation().execute(string[5]);
                         }
                         Intent i = new Intent(LogInActivity.this,
                                 MainActivity.class);
@@ -100,11 +108,17 @@ public class LogInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             String bandName = strings[0];
+            Log.d("bandName = ", bandName);
             OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                     .connectTimeout(100, TimeUnit.SECONDS)
                     .writeTimeout(100, TimeUnit.SECONDS)
                     .readTimeout(300, TimeUnit.SECONDS).build();
+            try{
+                String[] band = bandName.split("%");
+                bandName = band[1];
+            }catch(Exception e){
 
+            }
             String url_band = "http://10.0.2.2/api/read_bands.php" + "?band_name="
                     + bandName;
             Request request = new Request.Builder()
@@ -123,8 +137,14 @@ public class LogInActivity extends AppCompatActivity {
                         Toast.makeText(LogInActivity.this, "Email or Password mismatched!", Toast.LENGTH_SHORT).show();
                     }else{
                         String[] results = result.split("~");
+                        String encodeImage;
                         for(int i=0; i <results.length;i++){
-                            Log.d("result = ", results[i]);
+                            Log.d("joeeeeeee = ", results[i]);
+                        }
+                        try{
+                            encodeImage = results[0];
+                        }catch(Exception e){
+                            encodeImage = " ";
                         }
                         SharedPreferences sharedPreferences10 = getSharedPreferences("bandDescription", MODE_PRIVATE);
                         SharedPreferences sharedPreferences11 = getSharedPreferences("bandLocation", MODE_PRIVATE);
@@ -138,16 +158,18 @@ public class LogInActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor13 = sharedPreferences13.edit();
                         SharedPreferences.Editor editor14 = sharedPreferences14.edit();
                         SharedPreferences.Editor editor15 = sharedPreferences15.edit();
-                        editor10.putString("bandDescription", results[1]);
-                        editor11.putString("bandLocation", results[2]);
-                        editor12.putString("bandGenre", results[3]);
-                        editor13.putString("bandRequests", results[4]);
-                        editor14.putString("bandMembers", results[5]);
+                        editor10.putString("bandDescription", results[2]);
+                        editor11.putString("bandLocation", results[3]);
+                        editor12.putString("bandGenre", results[4]);
+                        editor13.putString("bandRequests", results[5]);
+                        editor14.putString("bandMembers", results[6]);
+                        editor15.putString("BandImageURI", encodeImage);
                         editor10.apply();
                         editor11.apply();
                         editor12.apply();
                         editor13.apply();
                         editor14.apply();
+                        editor15.apply();
                     }
                 }
             }catch(Exception e){
@@ -156,8 +178,8 @@ public class LogInActivity extends AppCompatActivity {
             return null;
         }
     }
-    public void saveUserInformation(String Name, String Email, String Genre, String Instrument, String Location, String Band, String imageURI){
-        Log.d("ITEMS = ", Instrument + Genre);
+    public void saveUserInformation(String Name, String Email, String Genre, String Instrument, String Location, String Band, String imageURI, String province){
+        Log.d("imageURI = ", imageURI);
         SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
         SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
         SharedPreferences sharedPreferences2=getSharedPreferences("Genre",MODE_PRIVATE);
@@ -165,6 +187,7 @@ public class LogInActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences4=getSharedPreferences("Location",MODE_PRIVATE);
         SharedPreferences sharedPreferences5=getSharedPreferences("Band",MODE_PRIVATE);
         SharedPreferences sharedPreferences6=getSharedPreferences("ImageURI",MODE_PRIVATE);
+        SharedPreferences sharedPreferences7=getSharedPreferences("Province",MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
@@ -173,6 +196,7 @@ public class LogInActivity extends AppCompatActivity {
         SharedPreferences.Editor editor4 = sharedPreferences4.edit();
         SharedPreferences.Editor editor5 = sharedPreferences5.edit();
         SharedPreferences.Editor editor6 = sharedPreferences6.edit();
+        SharedPreferences.Editor editor7 = sharedPreferences7.edit();
 
         editor.putString("Name",Name);
         editor1.putString("Email",Email);
@@ -181,7 +205,7 @@ public class LogInActivity extends AppCompatActivity {
         editor4.putString("Location",Location);
         editor5.putString("Band",Band);
         editor6.putString("ImageURI",imageURI);
-
+        editor7.putString("Province",province);
         editor.apply();
         editor1.apply();
         editor2.apply();
@@ -189,5 +213,6 @@ public class LogInActivity extends AppCompatActivity {
         editor4.apply();
         editor5.apply();
         editor6.apply();
+        editor7.apply();
     }
 }
