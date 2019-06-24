@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -10,49 +10,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="end"
         android:text="Marshmallow"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/textView101"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView100"
-        android:layout_marginTop="5dp"
+        android:layout_below="@+id/textView103"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="213dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="end"
         android:text="Android 6.0"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/textView103"
-        android:layout_width="161dp"
-        android:layout_height="32dp"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView100"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="285dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginStart="310dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="2dp"
+        android:gravity="end"
         android:text="23"
-        android:textAppearance="?android:attr/textAppearanceButton"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView102"
+        android:layout_width="200dp"
+        android:layout_height="62dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="35dp"
+        android:text="23"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
-
-        <TextView
-            android:id="@+id/textView102"
-            android:layout_width="140dp"
-            android:layout_height="29dp"
-            android:text="23"
-            android:textAppearance="?android:attr/textAppearanceButton"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
 
     </LinearLayout>
 

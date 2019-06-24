@@ -39,6 +39,8 @@ public class musicanResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musican_result);
+        musicanResultActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background7);
+
         nListView = findViewById(R.id.listView2);
         nListView.setOnItemClickListener(new GridItemClickListener());
         MusicanResults = new ArrayList<>();
@@ -100,8 +102,8 @@ public class musicanResultActivity extends AppCompatActivity {
 
                     if (region_filter.equals("All") || region_filter.equals(province)){
                         if (city_filter.equals("All") || location.equals(city_filter)){
-                            if (genre_filter.equals("Diverse") || genre.equals(genre_filter)){
-                                if (instrument_filter.equals("All") || instrument.equals(instrument_filter)){
+                            if (genre_filter.equals("All") || genre.equals(genre_filter)){
+                                if (instrument.equals(instrument_filter)){
                                     MusicanResults.add(results[i]);
 
                                 }

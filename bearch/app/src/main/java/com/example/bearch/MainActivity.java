@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         }
         try{
             String[] band = Band.split("%");
-            Log.d("BAND = ", Band);
             btnCreate.setText("Request to:" + band[1]);
             btnCreate.setClickable(false);
         }catch(Exception e){

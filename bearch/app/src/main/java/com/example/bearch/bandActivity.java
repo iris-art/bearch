@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Field;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -54,21 +55,21 @@ public class bandActivity extends AppCompatActivity {
         setContentView(R.layout.activity_band);
         imageView = findViewById(R.id.imageView4);
         bandActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.band_background);
+
+
+        String bandLocation = getPreference("BandLocation");
+        String bandGenre = getPreference("BandGenre");
+
         String [] items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
         String[] items1 = new String[] {"Diverse", "Classic", "Folk", "Latin", "Schlager", "Jazz", "R&B", "Rock", "Pop", "Electronic"};
-        SharedPreferences sharedPreferences=getSharedPreferences("Band",MODE_PRIVATE);
-        band = sharedPreferences.getString("Band", "None");
-        SharedPreferences sharedPreferences1=getSharedPreferences("bandGenre",MODE_PRIVATE);
-        String bandGenre = sharedPreferences1.getString("bandGenre", "None");
-        SharedPreferences sharedPreferences2=getSharedPreferences("bandLocation",MODE_PRIVATE);
-        String bandLocation = sharedPreferences2.getString("bandLocation", "None");
-        SharedPreferences sharedPreferences3=getSharedPreferences("bandDescription",MODE_PRIVATE);
-        BandDescription = sharedPreferences3.getString("bandDescription", "None");
+
         bandName = findViewById(R.id.name);
+        band = getPreference("Band");
+        bandName.setText(band);
         bandDescription = findViewById(R.id.description);
+        BandDescription = getPreference("BandDescription");
         bandDescription.setText(BandDescription);
-        SharedPreferences sharedPreferences5=getSharedPreferences("BandImageURI",MODE_PRIVATE);
-        encodeImage =sharedPreferences5.getString("BandImageURI","None");
+        encodeImage = getPreference("BandImageURI");
 
         imageView = findViewById(R.id.imageView4);
         if(encodeImage.length() > 10){
@@ -80,12 +81,30 @@ public class bandActivity extends AppCompatActivity {
                 e.getMessage();
             }
         }
-        bandName.setText(band);
+
+        //        make ArrayAdapters for spinners
+        ArrayAdapter ProvincesAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.Provinces,
+                R.layout.color_spinner_layout
+        );
+        ArrayAdapter GenreAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.Genres,
+                R.layout.color_spinner_layout
+        );
+
+//        set dropdowns View Resource for spinners
         spinner1 = findViewById(R.id.spinner1);
-        spinner2 = findViewById(R.id.spinner2);
+        ProvincesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+        spinner1.setAdapter(ProvincesAdapter);
         spinner3 = findViewById(R.id.spinner3);
-        setAdapter(items, spinner1);
-        setAdapter(items1, spinner3);
+        GenreAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+        spinner3.setAdapter(GenreAdapter);
+
+//        set the correct values selected on the spinners for province and city by going through all
+//        the provinces and city and wait untill correct city is found, nrCity is used because
+//        it'll break if you set spinner2 because of the onClickListener of spinner1
         for (int i = 0; i < items.length; i ++){
             String [] cities = getCities(items[i]);
             for (int j = 0; j < cities.length; j++){
@@ -103,32 +122,65 @@ public class bandActivity extends AppCompatActivity {
             }
         }
 
-
+        spinner2 = findViewById(R.id.spinner2);
+//        set onItemSelectedListener for spinner1, if something is selected, the string[] for
+//        spinner2 has to be changed
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setAdapter(getCities(items[position]), spinner2);
+//                get Province and string[] with all the cities
+                String Province = getResources().getStringArray(R.array.Provinces)[position];
+                int resId = getResId(Province, R.array.class);
+                //        make ArrayAdapters for spinners
+                ArrayAdapter PlaceAdapter = ArrayAdapter.createFromResource(
+                        bandActivity.this,
+                        resId,
+                        R.layout.color_spinner_layout
+                );
+//                set dropdowns View Resource for spinners
+                PlaceAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+                spinner2.setAdapter(PlaceAdapter);
+
+//                because at the start nrCity is defined we are able to set the correct city here
                 if (nrCity != null){
                     spinner2.setSelection(nrCity);
                     nrCity = null;
                 }
             }
 
+            //            nothing happens here.
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                spinner2.setSelection(nrCity);
-                Log.d("HEY1", nrCity.toString());
             }
         });
 
 
     }
-    public void onClick4(View view){
+
+    //    easy way to get the sharedPreferences
+    private String getPreference(String name){
+        SharedPreferences sharedPreferences=getSharedPreferences(name,MODE_PRIVATE);
+        String Name = sharedPreferences.getString(name, "None");
+        return Name;
+    }
+
+    //    this is used to get the id (int) for the array with list items in values->strings
+    public static int getResId(String resName, Class<?> c) {
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public void Requests(View view){
         Intent intent = new Intent(this, requestsActivity.class);
         startActivity(intent);
     }
-    public void onClick5(View view){
+    public void Members(View view){
         Intent intent = new Intent(this, memberActivity.class);
         startActivity(intent);
     }

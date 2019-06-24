@@ -18,7 +18,7 @@
             android:layout_height="250dp"
             android:layout_gravity="center_horizontal"
             android:clickable="true"
-            android:onClick="onClick1"
+            android:onClick="Gallery"
             android:scrollY="-25dp"
             android:src="@drawable/background"
             app:civ_border_width="2dp" />
@@ -60,7 +60,7 @@
             android:textSize="36sp" />
 
         <TextView
-            android:id="@+id/textview5"
+            android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|start|center_horizontal"
@@ -75,7 +75,7 @@
             android:spinnerMode="dialog" />
 
         <TextView
-            android:id="@+id/textview6"
+            android:id="@+id/genre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|start|center_horizontal"
@@ -90,7 +90,7 @@
             android:spinnerMode="dropdown" />
 
         <TextView
-            android:id="@+id/textview7"
+            android:id="@+id/members"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|start|center_horizontal"
@@ -120,13 +120,13 @@
             android:spinnerMode="dropdown" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="74dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:onClick="onClick"
+            android:onClick="saveUser"
             android:text="Save"
             android:textColor="#FFFFFF"
             android:textSize="30sp"

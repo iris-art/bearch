@@ -587,4 +587,605 @@
         <item> Winsum </item>
         <item> Zuidhorn </item>
     </string-array>
+    <string-array name="Provinces_filter">
+        <item> All </item>
+        <item> Limburg </item>
+        <item> NoordBrabant </item>
+        <item> Zeeland </item>
+        <item> ZuidHolland </item>
+        <item> NoordHolland </item>
+        <item> Utrecht </item>
+        <item> Gelderland </item>
+        <item> Overijssel </item>
+        <item> Drenthe </item>
+        <item> Friesland </item>
+        <item> Groningen </item>
+    </string-array>
+    <string-array name="Instruments_filter">
+        <item> All </item>
+        <item> Singer </item>
+        <item> Accordion </item>
+        <item> Bagpipes </item>
+        <item> Banjo </item>
+        <item> Bass guitar </item>
+        <item> Bassoon </item>
+        <item> Berimbau </item>
+        <item> Bongo </item>
+        <item> Cello </item>
+        <item> Clarinet </item>
+        <item> Cor anglais </item>
+        <item> Cornet </item>
+        <item> Cymbal </item>
+        <item> Didgeridoo </item>
+        <item> Double bass </item>
+        <item> Drum kit </item>
+        <item> Euphonium </item>
+        <item> Flute </item>
+        <item> French horn </item>
+        <item> Glass harmonica </item>
+        <item> Glockenspiel </item>
+        <item> Gong </item>
+        <item> Guitar </item>
+        <item> Harmonica </item>
+        <item> Harp </item>
+        <item> Harpsichord </item>
+        <item> Hammered dulcimer </item>
+        <item> Hurdy gurdy </item>
+        <item> Jew’s harp </item>
+        <item> Kalimba </item>
+        <item> Lute </item>
+        <item> Lyre </item>
+        <item> Mandolin </item>
+        <item> Marimba </item>
+        <item> Melodica </item>
+        <item> Oboe </item>
+        <item> Ocarina </item>
+        <item> Octobass </item>
+        <item> Organ </item>
+        <item> Pan Pipes </item>
+        <item> Pennywhistle </item>
+        <item> Piano </item>
+        <item> Piccolo </item>
+        <item> Pungi </item>
+        <item> Recorder </item>
+        <item> Saxophone </item>
+        <item> Sitar </item>
+        <item> Synthesizer </item>
+        <item> Tambourine </item>
+        <item> Timpani </item>
+        <item> Triangle </item>
+        <item> Trombone </item>
+        <item> Trumpet </item>
+        <item> Theremin </item>
+        <item> Tuba </item>
+        <item> Ukulele </item>
+        <item> Viola </item>
+        <item> Violin </item>
+        <item> Whamola </item>
+        <item> Xylophone </item>
+        <item> Zither </item>
+    </string-array>
+    <string-array name="Genres_filter">
+        <item> All </item>
+        <item> Diverse </item>
+        <item> Classic </item>
+        <item> Folk </item>
+        <item> Latin </item>
+        <item> Schlager </item>
+        <item> Jazz </item>
+        <item> R and B </item>
+        <item> Rock </item>
+        <item> Pop </item>
+        <item> Electronic </item>
+    </string-array>
+    <string-array name="NoordHolland_filter">
+        <item> All </item>
+        <item> Aalsmeer </item>
+        <item> Alkmaar </item>
+        <item> Amstelveen </item>
+        <item> Amsterdam </item>
+        <item> Andijk </item>
+        <item> Anna Paulowna </item>
+        <item> Beemster </item>
+        <item> Bennebroek </item>
+        <item> Bergen </item>
+        <item> Beverwijk </item>
+        <item> Blaricum </item>
+        <item> Bloemendaal </item>
+        <item> Bussum </item>
+        <item> Castricum </item>
+        <item> Diemen </item>
+        <item> Drechterland </item>
+        <item> Edam-Volendam </item>
+        <item> Enkhuizen </item>
+        <item> Graft-De Rijp </item>
+        <item> Haarlem </item>
+        <item> Haarlemmerliede en Spaarnwoude </item>
+        <item> Haarlemmermeer </item>
+        <item> Harenkarspel </item>
+        <item> Heemskerk </item>
+        <item> Heemstede </item>
+        <item> Heerhugowaard </item>
+        <item> Heiloo </item>
+        <item> Den Helder </item>
+        <item> Hilversum </item>
+        <item> Hoorn </item>
+        <item> Huizen </item>
+        <item> Landsmeer </item>
+        <item> Langedijk </item>
+        <item> Laren </item>
+        <item> Medemblik </item>
+        <item> Muiden </item>
+        <item> Naarden </item>
+        <item> Niedorp </item>
+        <item> Noorder-Koggenland </item>
+        <item> Obdam </item>
+        <item> Oostzaan </item>
+        <item> Opmeer </item>
+        <item> Ouder-Amstel </item>
+        <item> Purmerend </item>
+        <item> Schagen </item>
+        <item> Schermer </item>
+        <item> Stede Broec </item>
+        <item> Texel </item>
+        <item> Uitgeest </item>
+        <item> Uithoorn </item>
+        <item> Velsen </item>
+        <item> Waterland </item>
+        <item> Weesp </item>
+        <item> Wervershoof </item>
+        <item> Wester-Koggenland </item>
+        <item> Wieringen </item>
+        <item> Wieringermeer </item>
+        <item> Wijdemeren </item>
+        <item> Wognum </item>
+        <item> Wormerland </item>
+        <item> Zaanstad </item>
+        <item> Zandvoort </item>
+        <item> Zeevang </item>
+        <item> Zijpe </item>
+    </string-array>
+    <string-array name="ZuidHolland_filter">
+        <item> All </item>
+        <item> Ter Aar </item>
+        <item> Alblasserdam </item>
+        <item> Albrandswaard </item>
+        <item> Alkemade </item>
+        <item> Alphen aan den Rijn </item>
+        <item> Barendrecht </item>
+        <item> Bergambacht </item>
+        <item> Bergschenhoek </item>
+        <item> Berkel en Rodenrijs </item>
+        <item> Bernisse </item>
+        <item> Binnenmaas </item>
+        <item> Bleiswijk </item>
+        <item> Bodegraven </item>
+        <item> Boskoop </item>
+        <item> Brielle </item>
+        <item> Capelle aan den IJssel </item>
+        <item> Cromstrijen </item>
+        <item> Delft </item>
+        <item> Dirksland </item>
+        <item> Dordrecht </item>
+        <item> Giessenlanden </item>
+        <item> Goedereede </item>
+        <item> Gorinchem </item>
+        <item> Gouda </item>
+        <item> Graafstroom </item>
+        <item> s-Gravendeel </item>
+        <item> s-Gravenhage </item>
+        <item> Hardinxveld-Giessendam </item>
+        <item> Hellevoetsluis </item>
+        <item> Hendrik-Ido-Ambacht </item>
+        <item> Hillegom </item>
+        <item> Jacobswoude </item>
+        <item> Katwijk </item>
+        <item> Korendijk </item>
+        <item> Krimpen aan den IJssel </item>
+        <item> Leerdam </item>
+        <item> Leiden </item>
+        <item> Leiderdorp </item>
+        <item> Leidschendam-Voorburg </item>
+        <item> Liemeer </item>
+        <item> Liesveld </item>
+        <item> Lisse </item>
+        <item> Maassluis </item>
+        <item> Middelharnis </item>
+        <item> Midden-Delfland </item>
+        <item> Moordrecht </item>
+        <item> Nederlek </item>
+        <item> Nieuwerkerk aan den IJssel </item>
+        <item> Nieuwkoop </item>
+        <item> Nieuw-Lekkerland </item>
+        <item> Noordwijk </item>
+        <item> Noordwijkerhout </item>
+        <item> Oegstgeest </item>
+        <item> Oostflakkee </item>
+        <item> Oud-Beijerland </item>
+        <item> Ouderkerk </item>
+        <item> Papendrecht </item>
+        <item> Pijnacker-Nootdorp </item>
+        <item> Reeuwijk </item>
+        <item> Ridderkerk </item>
+        <item> Rijnwoude </item>
+        <item> Rijswijk </item>
+        <item> Rotterdam </item>
+        <item> Rozenburg </item>
+        <item> Schiedam </item>
+        <item> Schoonhoven </item>
+        <item> Sliedrecht </item>
+        <item> Spijkenisse </item>
+        <item> Strijen </item>
+        <item> Teylingen </item>
+        <item> Vlaardingen </item>
+        <item> Vlist </item>
+        <item> Voorschoten </item>
+        <item> Waddinxveen </item>
+        <item> Wassenaar </item>
+        <item> Westland </item>
+        <item> Westvoorne </item>
+        <item> Zederik </item>
+        <item> Zevenhuizen-Moerkapelle </item>
+        <item> Zoetermeer </item>
+        <item> Zoeterwoude </item>
+        <item> Zwijndrecht </item>
+    </string-array>
+    <string-array name="Limburg_filter">
+        <item> All </item>
+        <item> Ambt Montfort </item>
+        <item> Arcen en Velden </item>
+        <item> Beek </item>
+        <item> Beesel </item>
+        <item> Bergen </item>
+        <item> Brunssum </item>
+        <item> Echt-Susteren </item>
+        <item> Eijsden </item>
+        <item> Gennep </item>
+        <item> Gulpen-Wittem </item>
+        <item> Haelen </item>
+        <item> Heel </item>
+        <item> Heerlen </item>
+        <item> Helden </item>
+        <item> Heythuysen </item>
+        <item> Horst aan de Maas </item>
+        <item> Hunsel </item>
+        <item> Kerkrad </item>
+        <item> Eijsden </item>
+        <item> Gennep </item>
+        <item> Gulpen-Wittem </item>
+        <item> Haelen </item>
+        <item> Heel </item>
+        <item> Heerlen </item>
+        <item> Helden </item>
+        <item> Heythuysen </item>
+        <item> Houm </item>
+        <item> Meerssen </item>
+        <item> Meijel </item>
+        <item> Mook en Middelaar </item>
+        <item> Nederweert </item>
+        <item> Nuth </item>
+        <item> Onderbanken </item>
+        <item> Roerdalen </item>
+        <item> Roermond </item>
+        <item> Roggel en Neer </item>
+        <item> Srst aan de Maas </item>
+        <item> Hunsel </item>
+        <item> Kerkrade </item>
+        <item> Kessel </item>
+        <item> Landgraaf </item>
+        <item> Maasbracht </item>
+        <item> Maasbree </item>
+        <item> Maalkenburg aan de Geul </item>
+        <item> Venlo </item>
+        <item> Venray </item>
+        <item> Voerendaal </item>
+        <item> Weert </item>
+        <item> stricht </item>
+        <item> Margraten </item>
+        <item> Meerlo-Wanssum </item>
+        <item> Meerssen </item>
+        <item> Meijel </item>
+        <item> Mook en Middelaar </item>
+        <item> Nederweert </item>
+        <item> Nuth </item>
+        <item> Onderbanken </item>
+        <item> Roerdalen </item>
+        <item> Roermond </item>
+        <item> Roggel en Neer </item>
+        <item> Schinnen </item>
+        <item> Sevenum </item>
+        <item> Simpelveld </item>
+        <item> Sittard-Geleen </item>
+        <item> Stein </item>
+        <item> Swalmen </item>
+        <item> Thorn </item>
+        <item> Vaals </item>
+        <item> Valkenburg aan de Geul </item>
+        <item> Venlo </item>
+        <item> Venray </item>
+        <item> Voerendaal </item>
+        <item> Weert </item>
+    </string-array>
+    <string-array name="Zeeland_filter">
+        <item> All </item>
+        <item> Borsele </item>
+        <item> Goes </item>
+        <item> Hulst </item>
+        <item> Kapelle </item>
+        <item> Middelburg </item>
+        <item> Noord-Beveland </item>
+        <item> Reimerswaal </item>
+        <item> Schouwen-Duiveland </item>
+        <item> Sluis </item>
+        <item> Terneuzen </item>
+        <item> Tholen </item>
+        <item> Veere </item>
+        <item> Vlissingen </item>
+    </string-array>
+    <string-array name="Utrecht_filter">
+        <item> All </item>
+        <item> Abcoude </item>
+        <item> Amersfoort </item>
+        <item> Baarn </item>
+        <item> De Bilt </item>
+        <item> Breukelen </item>
+        <item> Bunnik </item>
+        <item> Bunschoten </item>
+        <item> Eemnes </item>
+        <item> Houten </item>
+        <item> IJsselstein </item>
+        <item> Leusden </item>
+        <item> Loenen </item>
+        <item> Lopik </item>
+        <item> Maarssen </item>
+        <item> Montfoort </item>
+        <item> Nieuwegein </item>
+        <item> Oudewater </item>
+        <item> Renswoude </item>
+        <item> Rhenen </item>
+        <item> De Ronde Venen </item>
+        <item> Soest </item>
+        <item> Utrecht </item>
+        <item> Utrechtse Heuvelrug </item>
+        <item> Veenendaal </item>
+        <item> Vianen </item>
+        <item> Wijk bij Duurstede </item>
+        <item> Woerden </item>
+        <item> Woudenberg </item>
+        <item> Zeist </item>
+    </string-array>
+    <string-array name="NoordBrabant_filter">
+        <item> All </item>
+        <item> Aalburg </item>
+        <item> Alphen-Chaam </item>
+        <item> Asten </item>
+        <item> Baarle-Nassau </item>
+        <item> Bergeijk </item>
+        <item> Bergen op Zoom </item>
+        <item> Bernheze </item>
+        <item> Best </item>
+        <item> Bladel </item>
+        <item> Boekel </item>
+        <item> Boxmeer </item>
+        <item> Boxtel </item>
+        <item> Breda </item>
+        <item> Cranendonck </item>
+        <item> Cuijk </item>
+        <item> Deurne </item>
+        <item> Dongen </item>
+        <item> Drimmelen </item>
+        <item> Eersel </item>
+        <item> Eindhoven </item>
+        <item> Etten-Leur </item>
+        <item> Geertruidenberg </item>
+        <item> Geldrop-Mierlo </item>
+        <item> Gemert-Bakel </item>
+        <item> Gilze en Rijen </item>
+        <item> Goirle </item>
+        <item> Grave </item>
+        <item> Haaren </item>
+        <item> Halderberge </item>
+        <item> Heeze-Leende </item>
+        <item> Helmond </item>
+        <item> s-Hertogenbosch </item>
+        <item> Heusden </item>
+        <item> Hilvarenbeek </item>
+        <item> Laarbeek </item>
+        <item> Landerd </item>
+        <item> Lith </item>
+        <item> Loon op Zand </item>
+        <item> Maasdonk </item>
+        <item> Mill en Sint Hubert </item>
+        <item> Moerdijk </item>
+        <item> Oirschot </item>
+        <item> Oisterwijk </item>
+        <item> Oosterhout </item>
+        <item> Oss </item>
+        <item> Reusel-De Mierden </item>
+        <item> Roosendaal </item>
+        <item> Rucphen </item>
+        <item> Schijndel </item>
+        <item> Sint Anthonis </item>
+        <item> Sint-Michielsgestel </item>
+        <item> Sint-Oedenrode </item>
+        <item> Someren </item>
+        <item> Son en Breugel </item>
+        <item> Steenbergen </item>
+        <item> Tilburg </item>
+        <item> Uden </item>
+        <item> Valkenswaard </item>
+        <item> Veghel </item>
+        <item> Veldhoven </item>
+        <item> Vught </item>
+        <item> Waalre </item>
+        <item> Waalwijk </item>
+        <item> Werkendam </item>
+        <item> Woensdrecht </item>
+        <item> Woudrichem </item>
+        <item> Zundert </item>
+    </string-array>
+    <string-array name="Gelderland_filter">
+        <item> All </item>
+        <item> Aalten </item>
+        <item> Apeldoorn </item>
+        <item> Arnhem </item>
+        <item> Barneveld </item>
+        <item> Berkelland </item>
+        <item> Beuningen </item>
+        <item> Bronckhorst </item>
+        <item> Brummen </item>
+        <item> Buren </item>
+        <item> Culemborg </item>
+        <item> Doesburg </item>
+        <item> Doetinchem </item>
+        <item> Druten </item>
+        <item> Duiven </item>
+        <item> Ede </item>
+        <item> Elburg </item>
+        <item> Epe </item>
+        <item> Ermelo </item>
+        <item> Geldermalsen </item>
+        <item> Groenlo </item>
+        <item> Groesbeek </item>
+        <item> Harderwijk </item>
+        <item> Hattem </item>
+        <item> Heerde </item>
+        <item> Heumen </item>
+        <item> Lingewaal </item>
+        <item> Lingewaard </item>
+        <item> Lochem </item>
+        <item> Maasdriel </item>
+        <item> Millingen aan de Rijn </item>
+        <item> Montferland </item>
+        <item> Neder-Betuwe </item>
+        <item> Neerijnen </item>
+        <item> Nijkerk </item>
+        <item> Nijmegen </item>
+        <item> Nunspeet </item>
+        <item> Oldebroek </item>
+        <item> Oude IJsselstreek </item>
+        <item> Overbetuwe </item>
+        <item> Putten </item>
+        <item> Renkum </item>
+        <item> Rheden </item>
+        <item> Rijnwaarden </item>
+        <item> Rozendaal </item>
+        <item> Scherpenzeel </item>
+        <item> Tiel </item>
+        <item> Ubbergen </item>
+        <item> Voorst </item>
+        <item> Wageningen </item>
+        <item> West Maas en Waal </item>
+        <item> Westervoort </item>
+        <item> Wijchen </item>
+        <item> Winterswijk </item>
+        <item> Zaltbommel </item>
+        <item> Zevenaar </item>
+        <item> Zutphen </item>
+    </string-array>
+    <string-array name="Overijssel_filter">
+        <item> All </item>
+        <item> Almelo </item>
+        <item> Borne </item>
+        <item> Dalfsen </item>
+        <item> Deventer </item>
+        <item> Dinkelland </item>
+        <item> Enschede </item>
+        <item> Haaksbergen </item>
+        <item> Hardenberg </item>
+        <item> Hellendoorn </item>
+        <item> Hengelo </item>
+        <item> Hof van Twente </item>
+        <item> Kampen </item>
+        <item> Losser </item>
+        <item> Oldenzaal </item>
+        <item> Olst-Wijhe </item>
+        <item> Ommen </item>
+        <item> Raalte </item>
+        <item> Rijssen-Holten </item>
+        <item> Staphorst </item>
+        <item> Steenwijkerland </item>
+        <item> Tubbergen </item>
+        <item> Twenterand </item>
+        <item> Wierden </item>
+        <item> Zwartewaterland </item>
+        <item> Zwolle </item>
+    </string-array>
+    <string-array name="Drenthe_filter">
+        <item> All </item>
+        <item> Aa en Hunze </item>
+        <item> Assen </item>
+        <item> Borger-Odoorn </item>
+        <item> Coevorden </item>
+        <item> Emmen </item>
+        <item> Hoogeveen </item>
+        <item> Meppel </item>
+        <item> Midden-Drenthe </item>
+        <item> Noordenveld </item>
+        <item> Tynaarlo </item>
+        <item> Westerveld </item>
+        <item> De Wolden </item>
+    </string-array>
+    <string-array name="Friesland_filter">
+        <item> All </item>
+        <item> Achtkarspelen </item>
+        <item> Ameland </item>
+        <item> het Bildt </item>
+        <item> Boarnsterhim </item>
+        <item> Bolsward </item>
+        <item> Dantumadeel </item>
+        <item> Dongeradeel </item>
+        <item> Ferwerderadiel </item>
+        <item> Franekeradeel </item>
+        <item> GaasterlÃ¢n-Sleat </item>
+        <item> Harlingen </item>
+        <item> Heerenveen </item>
+        <item> Kollumerland en Nieuwkruisland </item>
+        <item> Leeuwarden </item>
+        <item> Leeuwarderadeel </item>
+        <item> Lemsterland </item>
+        <item> Littenseradiel </item>
+        <item> Menaldumadeel </item>
+        <item> Nijefurd </item>
+        <item> Ooststellingwerf </item>
+        <item> Opsterland </item>
+        <item> Schiermonnikoog </item>
+        <item> SkarsterlÃ¢n </item>
+        <item> Smallingerland </item>
+        <item> Sneek </item>
+        <item> Terschelling </item>
+        <item> Tytsjerksteradiel </item>
+        <item> Vlieland </item>
+        <item> Weststellingwerf </item>
+        <item> WÃ»nseradiel </item>
+        <item> Wymbritseradiel </item>
+    </string-array>
+    <string-array name="Groningen_filter">
+        <item> All </item>
+        <item> Appingedam </item>
+        <item> Bedum </item>
+        <item> Bellingwedde </item>
+        <item> Ten Boer </item>
+        <item> Delfzijl </item>
+        <item> Eemsmond </item>
+        <item> Groningen </item>
+        <item> Grootegast </item>
+        <item> Haren </item>
+        <item> Hoogezand-Sappemeer </item>
+        <item> Leek </item>
+        <item> Loppersum </item>
+        <item> De Marne </item>
+        <item> Marum </item>
+        <item> Menterwolde </item>
+        <item> Pekela </item>
+        <item> Reiderland </item>
+        <item> Scheemda </item>
+        <item> Slochteren </item>
+        <item> Stadskanaal </item>
+        <item> Veendam </item>
+        <item> Vlagtwedde </item>
+        <item> Winschoten </item>
+        <item> Winsum </item>
+        <item> Zuidhorn </item>
+    </string-array>
 </resources>

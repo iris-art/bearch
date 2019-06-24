@@ -35,85 +35,96 @@ import okhttp3.Response;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    Button btnSave;
+    Integer nrCity;
+    private static final int PICK_IMAGE = 100;
+
+    String encodeImage;
+    ImageView imageView;
     TextView name;
+    String Email;
     TextView email;
     Spinner spinner1;
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
-    String Email;
-    String[] items;
-    Integer nrCity;
-    private static final int PICK_IMAGE = 100;
-    Uri imageURI;
-    ImageView imageView;
-    String encodeImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
-        String Name = sharedPreferences.getString("Name", "None");
-        SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
-        Email = sharedPreferences1.getString("Email", "None");
-        SharedPreferences sharedPreferences2=getSharedPreferences("Genre",MODE_PRIVATE);
-        String Genre =sharedPreferences2.getString("Genre","None");
-        SharedPreferences sharedPreferences3=getSharedPreferences("Instrument",MODE_PRIVATE);
-        String Instrument =sharedPreferences3.getString("Instrument","None");
-        SharedPreferences sharedPreferences4=getSharedPreferences("Location",MODE_PRIVATE);
-        String Location =sharedPreferences4.getString("Location","None");
-        SharedPreferences sharedPreferences5=getSharedPreferences("ImageURI",MODE_PRIVATE);
-        encodeImage =sharedPreferences5.getString("ImageURI","None");
+        ProfileActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background4);
+
+//        get all the values from sharedpreferences and set in contentview
+        String Name = getPreference("Name");
+        name = findViewById(R.id.name);
+        name.setText(Name);
+
+        Email = getPreference("Email");
+        email = findViewById(R.id.email);
+        email.setText(Email);
 
         imageView = findViewById(R.id.imageView4);
+        String Genre = getPreference("Genre");
+        String Instrument = getPreference("Instrument");
+        String Location = getPreference("Location");
+        String Province = getPreference("Province");
+        encodeImage = getPreference("ImageURI");
+        spinner1 = findViewById(R.id.spinner1);
+        spinner2 = findViewById(R.id.spinner2);
+        spinner3 = findViewById(R.id.spinner3);
+        spinner4 = findViewById(R.id.spinner4);
+
+
+//        check if there is a bitmap in the database for setting the user's image
+//        else use standard picture
         if(encodeImage.length() > 10){
             try {
+//                make bitmap from the encoded String from the database
                 byte [] encodeByte=Base64.decode(encodeImage,Base64.DEFAULT);
-                Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte,
+                        0,
+                        encodeByte.length);
                 imageView.setImageBitmap(bitmap);
             } catch(Exception e) {
                 e.getMessage();
             }
         }
-        ProfileActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background4);
 
-        name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
-
-        name.setText(Name);
-        email.setText(Email);
-        btnSave = findViewById(R.id.button9);
-        spinner1 = findViewById(R.id.spinner1);
+//        make ArrayAdapters for spinners
         ArrayAdapter ProvincesAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.Provinces,
                 R.layout.color_spinner_layout
         );
-        ProvincesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
-        spinner1.setAdapter(ProvincesAdapter);
-        spinner2 = findViewById(R.id.spinner2);
-        spinner3 = findViewById(R.id.spinner3);
         ArrayAdapter GenreAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.Genres,
                 R.layout.color_spinner_layout
         );
-        GenreAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
-        spinner3.setAdapter(GenreAdapter);
-        spinner4 = findViewById(R.id.spinner4);
         ArrayAdapter InstrumentAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.Instruments,
                 R.layout.color_spinner_layout
         );
+
+//        set dropdowns View Resource for spinners
+        ProvincesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+        spinner1.setAdapter(ProvincesAdapter);
+        GenreAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+        spinner3.setAdapter(GenreAdapter);
         InstrumentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
         spinner4.setAdapter(InstrumentAdapter);
 
+        String[] provinces = getResources().getStringArray(R.array.Provinces);
 
-        for (int i = 0; i < getResources().getStringArray(R.array.Provinces).length; i ++){
-            String [] cities = getResources().getStringArray(R.array.Provinces);
+//        set the correct values selected on the spinners for province and city by going through all
+//        the provinces and city and wait untill correct city is found, nrCity is used because
+//        it'll break if you set spinner2 because of the onClickListener of spinner1
+        for (int i = 0; i < provinces.length; i ++){
+            int resId = getResId(provinces[i], R.array.class);
+            String [] cities = getResources().getStringArray(resId);
+
             for (int j = 0; j < cities.length; j++){
                 if (cities[j].equals(Location)){
                     spinner1.setSelection(i);
@@ -123,13 +134,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
 
+//        Loop through all genres and set the correct one selected on the spinner
         for (int i = 0; i < getResources().getStringArray(R.array.Genres).length; i++){
             if (getResources().getStringArray(R.array.Genres)[i].equals(Instrument)){
                 spinner3.setSelection(i);
-
             }
         }
-
+//        Loop through all Instruments and set the correct one selected on the spinner
         for (int i = 0; i < getResources().getStringArray(R.array.Instruments).length; i++){
             if (getResources().getStringArray(R.array.Instruments)[i].equals(Genre)){
                 spinner4.setSelection(i);
@@ -137,36 +148,50 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
 
-
+//        set onItemSelectedListener for spinner1, if something is selected, the string[] for
+//        spinner2 has to be changed
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                get Province and string[] with all the cities
                 String Province = getResources().getStringArray(R.array.Provinces)[position];
                 int resId = getResId(Province, R.array.class);
+                //        make ArrayAdapters for spinners
                 ArrayAdapter PlaceAdapter = ArrayAdapter.createFromResource(
                         ProfileActivity.this,
                         resId,
                         R.layout.color_spinner_layout
                 );
+//                set dropdowns View Resource for spinners
                 PlaceAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
                 spinner2.setAdapter(PlaceAdapter);
+
+//                because at the start nrCity is defined we are able to set the correct city here
                 if (nrCity != null){
                     spinner2.setSelection(nrCity);
                     nrCity = null;
                 }
             }
 
+//            nothing happens here.
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                spinner2.setSelection(nrCity);
             }
         });
 
 
     }
-    public static int getResId(String resName, Class<?> c) {
 
+//    easy way to get the sharedPreferences
+    private String getPreference(String name){
+        SharedPreferences sharedPreferences=getSharedPreferences(name,MODE_PRIVATE);
+        String Name = sharedPreferences.getString(name, "None");
+        return Name;
+    }
+
+//    this is used to get the id (int) for the array with list items in values->strings
+    public static int getResId(String resName, Class<?> c) {
         try {
             Field idField = c.getDeclaredField(resName);
             return idField.getInt(idField);
@@ -176,37 +201,46 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void setAdapter(String[] items, Spinner dropdown){
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        //set the spinners adapter to the previously created one.
-        dropdown.setAdapter(adapter);
-    }
-
-    public void onClick(View view){
+//  onclick function for saving users
+    public void saveUser(View view){
         new SaveUser().execute(name.getText().toString(),
-                email.getText().toString(), spinner2.getSelectedItem().toString(), spinner3.getSelectedItem().toString(), spinner4.getSelectedItem().toString(), Email, spinner2.getSelectedItem().toString());
+                email.getText().toString(),
+                spinner2.getSelectedItem().toString(),
+                spinner3.getSelectedItem().toString(),
+                spinner4.getSelectedItem().toString(),
+                Email,
+                spinner2.getSelectedItem().toString());
     }
 
-    public void onClick1(View view){
+//    on Click for opening Gallery
+    public void Gallery(View view){
         openGallery();
     }
 
+//    function for opening Gallery
     private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+        Intent gallery = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery,
+                PICK_IMAGE);
     }
 
+//    if something from Gallery is selected then...
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode,
+                resultCode,
+                data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-
-            imageURI = data.getData();
+            Uri imageURI = data.getData();
             try{
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageURI);
-                Bitmap resized = getResizedBitmap(bitmap,1000,1500);
+//                set imageURI to bitmap and if save button is hit, encodeImage will be stored in
+//                the database and sharedPreferences
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),
+                        imageURI);
+                Bitmap resized = getResizedBitmap(bitmap,
+                        1000,
+                        1500);
                 encodeImage = BitMapToString(resized);
                 imageView.setImageBitmap(bitmap);
             }catch(Exception e){
@@ -215,6 +249,8 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+//    function for converting a bitmap to a string, this is used for saving the bitmap
+//    in the database
     public String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,10, baos);
@@ -222,6 +258,9 @@ public class ProfileActivity extends AppCompatActivity {
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
     }
+
+//    function for resizing the bitmap, my api wasn't able to echo such long bitmaps so I had to
+//    resize all the images that the user uploads
     public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
         int width = bm.getWidth();
         System.out.println(width);
@@ -240,6 +279,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         return resizedBitmap;
     }
+
     public class SaveUser extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -315,6 +355,7 @@ public class ProfileActivity extends AppCompatActivity {
             return null;
         }
     }
+//    function for showing Toast messages
     public void showToast(final String Text){
         this.runOnUiThread(new Runnable() {
             @Override
