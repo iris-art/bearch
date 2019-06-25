@@ -13,41 +13,46 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class musicanListAdapter extends ArrayAdapter<String> {
+
+//    global value for all values that'll enter the list
     ArrayList<String> ListItems;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+//        don't reload every view every time
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.musicanlistitem, parent, false);
         }
+
+//        get all the textviews
         TextView Name = convertView.findViewById(R.id.textView102);
         TextView Location = convertView.findViewById(R.id.textView101);
         TextView Genre = convertView.findViewById(R.id.textView100);
         TextView Instrument = convertView.findViewById(R.id.textView103);
 
-
-        String province = null;
-        String imageURI = null;
+//        define values
         String genre = null;
-        String band = null;
         String instrument = null;
         String location = null;
-        String email = null;
         String name = null;
+
         try{
+//            get specific band from all the bands
             String user = ListItems.get(position);
+
             JSONObject Jobject = new JSONObject(user);
 
+//            set values
             name = Jobject.getString("name");
-            email = Jobject.getString("email");
             location = Jobject.getString("location");
-            band = Jobject.getString("band");
             instrument = Jobject.getString("instrument");
             genre = Jobject.getString("genre");
-            province = Jobject.getString("province");
         }catch(Exception e){
             e.printStackTrace();
         }
+
+//        set values in textviews
         Name.setText(name);
         Location.setText(location);
         Genre.setText(genre);
@@ -56,6 +61,7 @@ public class musicanListAdapter extends ArrayAdapter<String> {
         return convertView;
     }
 
+//    call function for the list adapter
     public musicanListAdapter(Context context, int resource, ArrayList<String> objects) {
         super(context, resource, objects);
         ListItems = objects;

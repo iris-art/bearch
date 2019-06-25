@@ -46,7 +46,7 @@ public class bandResultActivity extends AppCompatActivity {
         city = intent.getStringExtra("city");
         region = intent.getStringExtra("region");
 
-//        String with provinces
+//        String[] with provinces
         provinces = getResources().getStringArray(R.array.Provinces);
 
         new getBands().execute();
@@ -67,10 +67,10 @@ public class bandResultActivity extends AppCompatActivity {
 
 //                get the province of the band
                 for (int k=0; k<provinces.length;k++){
-                    int resId = getResId(provinces[i], R.array.class);
+                    int resId = getResId(provinces[k], R.array.class);
                     String [] cities = getResources().getStringArray(resId);
                     for (int l = 0; l < cities.length; l++){
-                        if (cities[l].equals(band[2])){
+                        if (cities[l].equals(band[3])){
                             region1 = provinces[k];
 
                         }
@@ -79,8 +79,8 @@ public class bandResultActivity extends AppCompatActivity {
 
 //                check if the band meets with the filter requirements
                 if (region.equals("All") || region.equals(region1)){
-                    if (city.equals("All") || band[2].equals(city)){
-                        if (genre.equals("All") || band[3].equals(genre)){
+                    if (city.equals("All") || band[3].equals(city)){
+                        if (genre.equals("All") || band[4].equals(genre)){
                             BandResults.add(results[i]);
                         }
                     }

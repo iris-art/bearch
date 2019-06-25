@@ -62,18 +62,23 @@ public class FilterMusicanActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinner1.getSelectedItem().toString().equals("All")){
+                    spinner2.setVisibility(View.INVISIBLE);
+                }else {
+                    spinner2.setVisibility(View.VISIBLE);
 //                get Province and string[] with all the cities
-                String Province = getResources().getStringArray(R.array.Provinces)[position] + "_filter";
-                int resId = getResId(Province, R.array.class);
-                //        make ArrayAdapters for spinners
-                ArrayAdapter PlaceAdapter = ArrayAdapter.createFromResource(
-                        FilterMusicanActivity.this,
-                        resId,
-                        R.layout.color_spinner_layout
-                );
+                    String Province = getResources().getStringArray(R.array.Provinces)[position-1] + "_filter";
+                    int resId = getResId(Province, R.array.class);
+                    //        make ArrayAdapters for spinners
+                    ArrayAdapter PlaceAdapter = ArrayAdapter.createFromResource(
+                            FilterMusicanActivity.this,
+                            resId,
+                            R.layout.color_spinner_layout
+                    );
 //                set dropdowns View Resource for spinners
-                PlaceAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
-                spinner2.setAdapter(PlaceAdapter);
+                    PlaceAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+                    spinner2.setAdapter(PlaceAdapter);
+                }
             }
 //            nothing happens here.
             @Override
@@ -89,7 +94,11 @@ public class FilterMusicanActivity extends AppCompatActivity {
 //        give intent all the extra filter parts
         Intent intent = new Intent(this, musicanResultActivity.class);
         intent.putExtra("region", spinner1.getSelectedItem().toString());
-        intent.putExtra("city", spinner2.getSelectedItem().toString());
+        if (spinner2.getVisibility() == View.VISIBLE){
+            intent.putExtra("city", spinner2.getSelectedItem().toString());
+        }else{
+            intent.putExtra("city", "All");
+        }
         intent.putExtra("genre", spinner3.getSelectedItem().toString());
         intent.putExtra("instrument", spinner4.getSelectedItem().toString());
         startActivity(intent);

@@ -56,8 +56,12 @@ public class FilterBandActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinner1.getSelectedItem().toString().equals("All")){
+                    spinner2.setVisibility(View.INVISIBLE);
+                }else{
+                    spinner2.setVisibility(View.VISIBLE);
 //                get Province and string[] with all the cities
-                String Province = getResources().getStringArray(R.array.Provinces)[position]+ "_filter";
+                String Province = getResources().getStringArray(R.array.Provinces)[position - 1]+ "_filter";
                 int resId = getResId(Province, R.array.class);
 
 //                make ArrayAdapters for spinners
@@ -69,6 +73,7 @@ public class FilterBandActivity extends AppCompatActivity {
 //                set dropdowns View Resource for spinners
                 PlaceAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
                 spinner2.setAdapter(PlaceAdapter);
+                }
             }
 //            nothing happens here.
             @Override
@@ -84,7 +89,12 @@ public class FilterBandActivity extends AppCompatActivity {
 //        give intent all the extra filter parts
         Intent intent = new Intent(this, bandResultActivity.class);
         intent.putExtra("region", spinner1.getSelectedItem().toString());
-        intent.putExtra("city", spinner2.getSelectedItem().toString());
+        if (spinner2.getVisibility() == View.VISIBLE){
+            intent.putExtra("city", spinner2.getSelectedItem().toString());
+        }else{
+            intent.putExtra("city", "All");
+        }
+
         intent.putExtra("genre", spinner3.getSelectedItem().toString());
 
         startActivity(intent);

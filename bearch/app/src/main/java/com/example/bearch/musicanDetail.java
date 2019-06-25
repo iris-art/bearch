@@ -23,22 +23,25 @@ import okhttp3.Response;
 
 public class musicanDetail extends AppCompatActivity {
 
-    String province = null;
-    String imageURI = null;
-    String genre = null;
-    String band = null;
-    String instrument = null;
-    String location = null;
-    String email = null;
-    String name = null;
+    String province;
+    String genre;
+    String band;
+    String instrument;
+    String location;
+    String email;
+    String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musican_detail);
         getWindow().setBackgroundDrawableResource(R.drawable.background4);
+
+//        get extras from intent
         Intent intent = getIntent();
         String musican = intent.getStringExtra("musican");
 
+//        define textViews
         TextView Email = findViewById(R.id.email);
         TextView Name = findViewById(R.id.name);
         TextView Location = findViewById(R.id.city);
@@ -46,6 +49,7 @@ public class musicanDetail extends AppCompatActivity {
         TextView Genre = findViewById(R.id.genre);
         TextView Instrument = findViewById(R.id.instrument);
 
+//        make Jobject from extras of the intent
         try{
             JSONObject Jobject = new JSONObject(musican);
 
@@ -60,6 +64,7 @@ public class musicanDetail extends AppCompatActivity {
             e.printStackTrace();
         }
 
+//        set values in the image and text views
         new getUserImage().execute(email);
         Name.setText(name);
         Location.setText(location);
@@ -68,15 +73,32 @@ public class musicanDetail extends AppCompatActivity {
         Email.setText(email);
         Province.setText(province);
     }
+
+//    function for calling the api for the user image from the database
     public class getUserImage extends AsyncTask<String, Void, String> {
+
         Bitmap bitmap;
+        String result;
+
+//        if request is finished
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             ImageView imageView = findViewById(R.id.imageView4);
-            imageView.setImageBitmap(bitmap);
+
+//            check if user there is a correct picture in preferences
+            if (!result.equals("null") && !result.equals(" ")) {
+                try {
+                    byte[] encodeByte = Base64.decode(result, Base64.DEFAULT);
+                    bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                    imageView.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+            }
         }
 
+//        function that make request to api for image of user
         @Override
         protected String doInBackground(String... strings) {
             String Email = strings[0];
@@ -97,17 +119,7 @@ public class musicanDetail extends AppCompatActivity {
             try{
                 response = okHttpClient.newCall(request).execute();
                 if(response.isSuccessful()) {
-                    String result = response.body().string();
-                    Log.d("RESULT = ", "JOE" + result);
-                    if (!result.equals("null") && !result.equals("")) {
-                        try {
-                            byte[] encodeByte = Base64.decode(result, Base64.DEFAULT);
-                            bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-
-                        } catch (Exception e) {
-                            e.getMessage();
-                        }
-                    }
+                    result = response.body().string();
                 }
 
             }catch(Exception e){

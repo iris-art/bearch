@@ -302,6 +302,7 @@ public class ProfileActivity extends AppCompatActivity {
                     "&user_instrument=" + Instrument +
                     "&user_genre=" + Genre +
                     "&user_province=" + Province;
+
             SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
             SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
             SharedPreferences sharedPreferences2=getSharedPreferences("Genre",MODE_PRIVATE);
@@ -355,6 +356,7 @@ public class ProfileActivity extends AppCompatActivity {
             return null;
         }
     }
+
 //    function for showing Toast messages
     public void showToast(final String Text){
         this.runOnUiThread(new Runnable() {
