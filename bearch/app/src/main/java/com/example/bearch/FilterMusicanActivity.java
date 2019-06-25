@@ -25,6 +25,7 @@ public class FilterMusicanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_musican);
         FilterMusicanActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background6);
+
         btnSearch = findViewById(R.id.button8);
         spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);

@@ -14,14 +14,20 @@ import static java.security.AccessController.getContext;
 
 public class bandListAdapter extends ArrayAdapter<String> {
 
+//    global value for all values that'll enter the list
     ArrayList<String> ListItems;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+//        don't reload every view every time
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.bandlistitem, parent, false);
         }
+
+//        get specific band from all the bands
         String band = ListItems.get(position);
+
+//        get all the propperties and set in the textviews
         String[] bandPropperties = band.split("~");
         String bandName = bandPropperties[0];
         String bandDescription = bandPropperties[1];
@@ -40,6 +46,7 @@ public class bandListAdapter extends ArrayAdapter<String> {
         return convertView;
     }
 
+//    call function for the list adapter
     public bandListAdapter(Context context, int resource, ArrayList<String> objects) {
         super(context, resource, objects);
         ListItems = objects;

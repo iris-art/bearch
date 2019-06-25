@@ -11,14 +11,20 @@ import java.util.ArrayList;
 
 public class memberListAdapter extends ArrayAdapter<String> {
 
+//    global value for all values that'll enter the list
     ArrayList<String> ListItems;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+//        don't reload every view every time
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.requestlistitem, parent, false);
         }
+
+//        get specific member from all the members
         String member = ListItems.get(position);
+
+//        set member in listview
         TextView name = convertView.findViewById(R.id.textView11);
         name.setText(member);
 
@@ -26,6 +32,7 @@ public class memberListAdapter extends ArrayAdapter<String> {
         return convertView;
     }
 
+//    call function for the list adapter
     public memberListAdapter(Context context, int resource, ArrayList<String> objects) {
         super(context, resource, objects);
         ListItems = objects;

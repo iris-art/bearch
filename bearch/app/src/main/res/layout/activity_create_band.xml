@@ -136,7 +136,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="#127090"
-            android:onClick="onClick1"
+            android:onClick="createBand"
             android:text="Create"
             android:textColor="#FFFFFF"
             android:textSize="30sp"

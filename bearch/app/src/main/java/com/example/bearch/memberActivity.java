@@ -17,9 +17,12 @@ public class memberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member);
+
+//        define listview and list for listview
         list = new ArrayList<>();
         ListView listView = findViewById(R.id.listView);
 
+//        get members from preferences and add to list
         SharedPreferences sharedPreferences1 = getSharedPreferences("bandMembers", MODE_PRIVATE);
         bandMembers = sharedPreferences1.getString("bandMembers", "None");
         String[] results = bandMembers.split("<>");
@@ -27,6 +30,7 @@ public class memberActivity extends AppCompatActivity {
             list.add(results[i]);
         }
 
+//        set adapter for listview
         listView.setAdapter(new memberListAdapter(this, 0, list));
     }
 }

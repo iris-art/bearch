@@ -31,7 +31,7 @@ public class FilterBandActivity extends AppCompatActivity {
         spinner2 = findViewById(R.id.spinner2);
         spinner3 = findViewById(R.id.spinner3);
 
-        //        make ArrayAdapters for spinners
+//        make ArrayAdapters for spinners
         ArrayAdapter ProvincesAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.Provinces_filter,
@@ -59,7 +59,8 @@ public class FilterBandActivity extends AppCompatActivity {
 //                get Province and string[] with all the cities
                 String Province = getResources().getStringArray(R.array.Provinces)[position]+ "_filter";
                 int resId = getResId(Province, R.array.class);
-                //        make ArrayAdapters for spinners
+
+//                make ArrayAdapters for spinners
                 ArrayAdapter PlaceAdapter = ArrayAdapter.createFromResource(
                         FilterBandActivity.this,
                         resId,
@@ -69,7 +70,7 @@ public class FilterBandActivity extends AppCompatActivity {
                 PlaceAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
                 spinner2.setAdapter(PlaceAdapter);
             }
-            //            nothing happens here.
+//            nothing happens here.
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -81,7 +82,7 @@ public class FilterBandActivity extends AppCompatActivity {
     //    start new intent in which the results of the filter will be shown
     public void search(View view){
 //        give intent all the extra filter parts
-        Intent intent = new Intent(this, musicanResultActivity.class);
+        Intent intent = new Intent(this, bandResultActivity.class);
         intent.putExtra("region", spinner1.getSelectedItem().toString());
         intent.putExtra("city", spinner2.getSelectedItem().toString());
         intent.putExtra("genre", spinner3.getSelectedItem().toString());

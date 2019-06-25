@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,11 +35,13 @@ public class bandDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band_detail);
         bandDetail.this.getWindow().setBackgroundDrawableResource(R.drawable.band_background);
+
 //        get textviews and set values in it
         name = findViewById(R.id.name);
         description = findViewById(R.id.description);
         location = findViewById(R.id.location);
         genre = findViewById(R.id.genre);
+
         Intent intent = getIntent();
         String band = intent.getStringExtra("band");
         String[] propperties = band.split("~");
@@ -49,7 +52,7 @@ public class bandDetail extends AppCompatActivity {
         genre.setText(propperties[4]);
         request = propperties[5];
 
-//        put members in textview down to each other
+//        put members in textview beneath eachother
         String[] members = propperties[6].split("<>");
         String members1 = "band members\nhead member = ";
         for(int i=0; i<members.length;i++){
@@ -74,13 +77,27 @@ public class bandDetail extends AppCompatActivity {
 //    get image of the band the user clicked on
     public class getBandImage extends AsyncTask<String, Void, String> {
         Bitmap bitmap;
+        String result;
 
 //        wait for result and than set picture in imageView
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             ImageView imageView = findViewById(R.id.imageView4);
-            imageView.setImageBitmap(bitmap);
+
+
+            if (!result.equals("null") && !result.equals("") && result.length() >0){
+//                if correct result, make bitmap and set image
+                try {
+                    byte [] encodeByte= Base64.decode(result,Base64.DEFAULT);
+                    bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+
+                    imageView.setImageBitmap(bitmap);
+                } catch(Exception e) {
+                    e.getMessage();
+                }
+            }
+
         }
 
 //        make the request to the api, the api will get the image from the database
@@ -112,20 +129,7 @@ public class bandDetail extends AppCompatActivity {
             try{
                 response = okHttpClient.newCall(request).execute();
                 if(response.isSuccessful()) {
-                    String result = response.body().string();
-
-                    if (!result.equals("null") && !result.equals("")){
-//                        if correct result, make bitmap and set image
-                        try {
-                            byte [] encodeByte= Base64.decode(result,Base64.DEFAULT);
-                            bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-                            ImageView imageView = findViewById(R.id.imageView4);
-                            imageView.setImageBitmap(bitmap);
-                        } catch(Exception e) {
-                            e.getMessage();
-                        }
-                    }
-
+                    result = response.body().string();
                 }
 
 //             log error

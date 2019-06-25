@@ -21,156 +21,191 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CreateBandActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE = 100;
-    Uri imageURI;
-    Button button;
-    ImageView imageView;
+    Spinner spinner1;
     Spinner spinner2;
     Spinner spinner3;
-    Spinner spinner4;
-    String members = "added: \n";
-    String members1;
-    TextView textView1;
+    String Name;
+    String Description;
+    String Genre;
+    String Location;
+    String Email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_band);
-        Spinner spinner1 = findViewById(R.id.spinner1);
+        spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);
         spinner3 = findViewById(R.id.spinner3);
-        String[] items = new String[] {"Limburg", "Noord-Brabant", "Zeeland", "Zuid-Holland", "Noord-Holland", "Utrecht", "Gelderland", "Overijssel", "Drenthe", "Friesland", "Groningen"};
-        String[] items1 = new String[] {"Diverse", "Classic", "Folk", "Latin", "Schlager", "Jazz", "R&B", "Rock", "Pop", "Electronic"};
-        setAdapter(items, spinner1);
-        setAdapter(items1, spinner3);
-        members1 = new String();
+
+//        make ArrayAdapters for spinners
+        ArrayAdapter ProvincesAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.Provinces,
+                R.layout.color_spinner_layout
+        );
+        ArrayAdapter GenreAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.Genres,
+                R.layout.color_spinner_layout
+        );
+
+//        set dropdowns View Resource for spinners
+        ProvincesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+        spinner1.setAdapter(ProvincesAdapter);
+        GenreAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+        spinner3.setAdapter(GenreAdapter);
+
+//        set onItemSelectedListener for spinner1, if something is selected, the string[] for
+//        spinner2 has to be changed
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("joe", items[position]);
-                if (items[position] == "Limburg"){
-                    String[] items = new String[] {"Ambt Montfort","Arcen en Velden","Beek","Beesel","Bergen","Brunssum","Echt-Susteren","Eijsden","Gennep","Gulpen-Wittem","Haelen","Heel","Heerlen","Helden","Heythuysen","Horst aan de Maas","Hunsel","Kerkrad","Eijsden","Gennep","Gulpen-Wittem","Haelen","Heel","Heerlen","Helden","Heythuysen","Houm","Meerssen","Meijel","Mook en Middelaar","Nederweert","Nuth","Onderbanken","Roerdalen","Roermond","Roggel en Neer","Srst aan de Maas","Hunsel","Kerkrade","Kessel","Landgraaf","Maasbracht","Maasbree","Maalkenburg aan de Geul","Venlo","Venray","Voerendaal","Weert","stricht","Margraten","Meerlo-Wanssum","Meerssen","Meijel","Mook en Middelaar","Nederweert","Nuth","Onderbanken","Roerdalen","Roermond","Roggel en Neer","Schinnen","Sevenum","Simpelveld","Sittard-Geleen","Stein","Swalmen","Thorn","Vaals","Valkenburg aan de Geul","Venlo","Venray","Voerendaal","Weert"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Noord-Brabant"){
-                    String[] items = new String[] {"Aalburg","Alphen-Chaam","Asten","Baarle-Nassau","Bergeijk","Bergen op Zoom","Bernheze","Best","Bladel","Boekel","Boxmeer","Boxtel","Breda","Cranendonck","Cuijk","Deurne","Dongen","Drimmelen","Eersel","Eindhoven","Etten-Leur","Geertruidenberg","Geldrop-Mierlo","Gemert-Bakel","Gilze en Rijen","Goirle","Grave","Haaren","Halderberge","Heeze-Leende","Helmond","'s-Hertogenbosch","Heusden","Hilvarenbeek","Laarbeek","Landerd","Lith","Loon op Zand","Maasdonk","Mill en Sint Hubert","Moerdijk","Oirschot","Oisterwijk","Oosterhout","Oss","Reusel-De Mierden","Roosendaal","Rucphen","Schijndel","Sint Anthonis","Sint-Michielsgestel","Sint-Oedenrode","Someren","Son en Breugel","Steenbergen","Tilburg","Uden","Valkenswaard","Veghel","Veldhoven","Vught","Waalre","Waalwijk","Werkendam","Woensdrecht","Woudrichem","Zundert"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Zeeland"){
-                    String[] items = new String[] {"Borsele","Goes","Hulst","Kapelle","Middelburg","Noord-Beveland","Reimerswaal","Schouwen-Duiveland","Sluis","Terneuzen","Tholen","Veere","Vlissingen"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Noord-Holland"){
-                    String[] items = new String[] {"Aalsmeer","Alkmaar","Amstelveen","Amsterdam","Andijk","Anna Paulowna","Beemster","Bennebroek","Bergen","Beverwijk","Blaricum","Bloemendaal","Bussum","Castricum","Diemen","Drechterland","Edam-Volendam","Enkhuizen","Graft-De Rijp","Haarlem","Haarlemmerliede en Spaarnwoude","Haarlemmermeer","Harenkarspel","Heemskerk","Heemstede","Heerhugowaard","Heiloo","Den Helder","Hilversum","Hoorn","Huizen","Landsmeer","Langedijk","Laren","Medemblik","Muiden","Naarden","Niedorp","Noorder-Koggenland","Obdam","Oostzaan","Opmeer","Ouder-Amstel","Purmerend","Schagen","Schermer","Stede Broec","Texel","Uitgeest","Uithoorn","Velsen","Waterland","Weesp","Wervershoof","Wester-Koggenland","Wieringen","Wieringermeer","Wijdemeren","Wognum","Wormerland","Zaanstad","Zandvoort","Zeevang","Zijpe"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Zuid-Holland"){
-                    String[] items = new String[] {"Ter Aar","Alblasserdam","Albrandswaard","Alkemade","Alphen aan den Rijn","Barendrecht","Bergambacht","Bergschenhoek","Berkel en Rodenrijs","Bernisse","Binnenmaas","Bleiswijk","Bodegraven","Boskoop","Brielle","Capelle aan den IJssel","Cromstrijen","Delft","Dirksland","Dordrecht","Giessenlanden","Goedereede","Gorinchem","Gouda","Graafstroom","'s-Gravendeel","'s-Gravenhage","Hardinxveld-Giessendam","Hellevoetsluis","Hendrik-Ido-Ambacht","Hillegom","Jacobswoude","Katwijk","Korendijk","Krimpen aan den IJssel","Leerdam","Leiden","Leiderdorp","Leidschendam-Voorburg","Liemeer","Liesveld","Lisse","Maassluis","Middelharnis","Midden-Delfland","Moordrecht","Nederlek","Nieuwerkerk aan den IJssel","Nieuwkoop","Nieuw-Lekkerland","Noordwijk","Noordwijkerhout","Oegstgeest","Oostflakkee","Oud-Beijerland","Ouderkerk","Papendrecht","Pijnacker-Nootdorp","Reeuwijk","Ridderkerk","Rijnwoude","Rijswijk","Rotterdam","Rozenburg","Schiedam","Schoonhoven","Sliedrecht","Spijkenisse","Strijen","Teylingen","Vlaardingen","Vlist","Voorschoten","Waddinxveen","Wassenaar","Westland","Westvoorne","Zederik","Zevenhuizen-Moerkapelle","Zoetermeer","Zoeterwoude","Zwijndrecht"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Utrecht"){
-                    String[] items = new String[] {"Abcoude","Amersfoort","Baarn","De Bilt","Breukelen","Bunnik","Bunschoten","Eemnes","Houten","IJsselstein","Leusden","Loenen","Lopik","Maarssen","Montfoort","Nieuwegein","Oudewater","Renswoude","Rhenen","De Ronde Venen","Soest","Utrecht","Utrechtse Heuvelrug","Veenendaal","Vianen","Wijk bij Duurstede","Woerden","Woudenberg","Zeist"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Gelderland"){
-                    String[] items = new String[] {"Aalten","Apeldoorn","Arnhem","Barneveld","Berkelland","Beuningen","Bronckhorst","Brummen","Buren","Culemborg","Doesburg","Doetinchem","Druten","Duiven","Ede","Elburg","Epe","Ermelo","Geldermalsen","Groenlo","Groesbeek","Harderwijk","Hattem","Heerde","Heumen","Lingewaal","Lingewaard","Lochem","Maasdriel","Millingen aan de Rijn","Montferland","Neder-Betuwe","Neerijnen","Nijkerk","Nijmegen","Nunspeet","Oldebroek","Oude IJsselstreek","Overbetuwe","Putten","Renkum","Rheden","Rijnwaarden","Rozendaal","Scherpenzeel","Tiel","Ubbergen","Voorst","Wageningen","West Maas en Waal","Westervoort","Wijchen","Winterswijk","Zaltbommel","Zevenaar","Zutphen"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Overijssel"){
-                    String[] items = new String[] {"Almelo","Borne","Dalfsen","Deventer","Dinkelland","Enschede","Haaksbergen","Hardenberg","Hellendoorn","Hengelo","Hof van Twente","Kampen","Losser","Oldenzaal","Olst-Wijhe","Ommen","Raalte","Rijssen-Holten","Staphorst","Steenwijkerland","Tubbergen","Twenterand","Wierden","Zwartewaterland","Zwolle"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Drenthe"){
-                    String[] items = new String[] {"Aa en Hunze","Assen","Borger-Odoorn","Coevorden","Emmen","Hoogeveen","Meppel","Midden-Drenthe","Noordenveld","Tynaarlo","Westerveld","De Wolden"};
-                    setAdapter(items, spinner2);
-                }
-                else if (items[position] == "Friesland"){
-                    String[] items = new String[] {"Achtkarspelen","Ameland","het Bildt","Boarnsterhim","Bolsward","Dantumadeel","Dongeradeel","Ferwerderadiel","Franekeradeel","GaasterlÃ¢n-Sleat","Harlingen","Heerenveen","Kollumerland en Nieuwkruisland","Leeuwarden","Leeuwarderadeel","Lemsterland","Littenseradiel","Menaldumadeel","Nijefurd","Ooststellingwerf","Opsterland","Schiermonnikoog","SkarsterlÃ¢n","Smallingerland","Sneek","Terschelling","Tytsjerksteradiel","Vlieland","Weststellingwerf","WÃ»nseradiel","Wymbritseradiel"};
-                    setAdapter(items, spinner2);
-                }
-                else{
-                    String[] items = new String[] {"Appingedam","Bedum","Bellingwedde","Ten Boer","Delfzijl","Eemsmond","Groningen","Grootegast","Haren","Hoogezand-Sappemeer","Leek","Loppersum","De Marne","Marum","Menterwolde","Pekela","Reiderland","Scheemda","Slochteren","Stadskanaal","Veendam","Vlagtwedde","Winschoten","Winsum","Zuidhorn"};
-                    setAdapter(items, spinner2);
-                }
+//                get Province and string[] with all the cities
+                String Province = getResources().getStringArray(R.array.Provinces)[position];
+                int resId = getResId(Province, R.array.class);
+                //        make ArrayAdapters for spinners
+                ArrayAdapter PlaceAdapter = ArrayAdapter.createFromResource(
+                        CreateBandActivity.this,
+                        resId,
+                        R.layout.color_spinner_layout
+                );
+//                set dropdowns View Resource for spinners
+                PlaceAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+                spinner2.setAdapter(PlaceAdapter);
             }
 
+//            nothing happens here.
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
-    public void setAdapter(String[] items, Spinner dropdown){
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        //set the spinners adapter to the previously created one.
-        dropdown.setAdapter(adapter);
-    }
-    public void onClick1(View view){
-        EditText name = findViewById(R.id.editText8);
-        String Name = name.getText().toString();
-        EditText description = findViewById(R.id.editText9);
-        String Description = description.getText().toString();
-        new CreateBand().execute(Name, Description);
+
+    //    this is used to get the id (int) for the array with list items in values->strings
+    public static int getResId(String resName, Class<?> c) {
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
+//    call function for creating a band
+    public void createBand(View view){
+
+//        get the values and call the create band function with these values
+        EditText name = findViewById(R.id.editText8);
+        Name = name.getText().toString();
+        EditText description = findViewById(R.id.editText9);
+        Description = description.getText().toString();
+        Location = spinner2.getSelectedItem().toString();
+        Genre = spinner3.getSelectedItem().toString();
+        SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
+        Email = sharedPreferences1.getString("Email", "None");
+        new CreateBand().execute();
+    }
+
+//    function for call the api to create a band
     public class CreateBand extends AsyncTask<String, Void, String>{
+        String result;
+        Response response;
+
+//        if request is finished
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+//            check if result is what we wanted
+            if (result.equalsIgnoreCase("Band created successfullyBand created successfully")) {
+                showToast("Band created successfully");
+
+//                save all the new values in shared preferences
+                SharedPreferences sharedPreferences5=getSharedPreferences("Band",MODE_PRIVATE);
+                SharedPreferences.Editor editor5 = sharedPreferences5.edit();
+                editor5.putString("Band",Name);
+                editor5.apply();
+
+                SharedPreferences sharedPreferences10 = getSharedPreferences("bandDescription", MODE_PRIVATE);
+                SharedPreferences sharedPreferences11 = getSharedPreferences("bandLocation", MODE_PRIVATE);
+                SharedPreferences sharedPreferences12 = getSharedPreferences("bandGenre", MODE_PRIVATE);
+                SharedPreferences.Editor editor10 = sharedPreferences10.edit();
+                SharedPreferences.Editor editor11 = sharedPreferences11.edit();
+                SharedPreferences.Editor editor12 = sharedPreferences12.edit();
+                editor10.putString("bandDescription", Description);
+                editor11.putString("bandLocation", Location);
+                editor12.putString("bandGenre", Genre);
+                editor10.apply();
+                editor11.apply();
+                editor12.apply();
+
+//                go to homescreen
+                Intent i = new Intent(CreateBandActivity.this,
+                        MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+//            else something went wrong
+            else{
+                showToast("Oops something went wrong!");
+            }
+        }
+
+//        function for connecting to api in the background
         @Override
         protected String doInBackground(String... strings) {
-            String Name = strings[0];
-            String Description = strings[1];
-            SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
-            String Email = sharedPreferences1.getString("Email", "None");
-            String finalURL = "http://10.0.2.2/api/create_band.php" + "?band_name="+ Name +
-                    "&band_description=" + Description
-                    + "&user_id=" + Email
-                    + "&band_location=" + spinner2.getSelectedItem().toString()
-                    + "&band_genre=" + spinner3.getSelectedItem().toString();
 
-            Log.d("results= ", "'" +finalURL+ "'");
+//            url for finding the api
+            String finalURL = "http://10.0.2.2/api/create_band.php";
+
             OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                     .connectTimeout(100, TimeUnit.SECONDS)
                     .writeTimeout(100, TimeUnit.SECONDS)
                     .readTimeout(300, TimeUnit.SECONDS).build();
+
+            RequestBody formBody = new FormBody.Builder()
+                    .add("user_id", Email)
+                    .add("band_name", Name)
+                    .add("band_description", Description)
+                    .add("band_location", Location)
+                    .add("band_genre", Genre)
+                    .build();
+
             Request request =  new Request.Builder()
                     .url(finalURL)
                     .get()
+                    .post(formBody)
                     .build();
-            Response response = null;
+
+//            do something if response is successfull
                 try{
                     response = okHttpClient.newCall(request).execute();
                     if (response.isSuccessful()){
-                        String result = response.body().string();
-                        Log.d("result = ", result);
-                        if (result.equalsIgnoreCase("Band created successfullyBand created successfully")) {
-                            showToast("Band created successfully");
-                            Intent i = new Intent(CreateBandActivity.this,
-                                   logoutActivity.class);
-                            startActivity(i);
-                            finish();
-                        }else{
-                            showToast("Oops something went wrong!");
-                        }
+                        result = response.body().string();
                     }
                 }catch (Exception e){
-                    Log.d("joe", "6");
+                    response = null;
                     e.printStackTrace();
                 }
             return null;
         }
     }
 
+//    function for show Toast messages to the screen
     public void showToast(final String Text){
         this.runOnUiThread(new Runnable() {
             @Override
