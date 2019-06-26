@@ -37,12 +37,11 @@ public class bandListAdapter extends ArrayAdapter<String> {
         TextView Name = convertView.findViewById(R.id.textView102);
         TextView Location = convertView.findViewById(R.id.textView101);
         TextView Genre = convertView.findViewById(R.id.textView100);
-        TextView Description = convertView.findViewById(R.id.textView103);
+
 
         Name.setText(bandName);
         Location.setText(bandLocation);
         Genre.setText(bandGenre);
-        Description.setText(bandDescription);
         return convertView;
     }
 
