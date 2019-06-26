@@ -32,7 +32,9 @@
         android:ems="10"
         android:hint="email"
         android:inputType="textPersonName"
+        android:textColor="#ffffff"
         android:textColorHint="#FFFFFF"
+        android:textColorLink="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -48,7 +50,9 @@
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
+        android:textColor="#ffffff"
         android:textColorHint="#FFFFFF"
+        android:textColorLink="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText3" />

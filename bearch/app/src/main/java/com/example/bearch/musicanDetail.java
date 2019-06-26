@@ -60,6 +60,7 @@ public class musicanDetail extends AppCompatActivity {
             instrument = Jobject.getString("instrument");
             genre = Jobject.getString("genre");
             province = Jobject.getString("province");
+
         }catch(Exception e){
             e.printStackTrace();
         }
