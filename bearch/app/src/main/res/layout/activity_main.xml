@@ -37,7 +37,7 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-condensed-light"
         android:onClick="FilterMusican"
-        android:text="search musicans"
+        android:text="search musicians"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"

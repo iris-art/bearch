@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Musicans"
+        android:text="Musicians"
         android:textColor="#ffffff"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
