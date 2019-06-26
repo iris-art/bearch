@@ -70,7 +70,7 @@
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/texview00"
+            android:id="@+id/genre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
