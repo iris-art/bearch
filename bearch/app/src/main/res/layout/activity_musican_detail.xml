@@ -71,7 +71,7 @@
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/genre"
+            android:id="@+id/joe10"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="City:"
@@ -97,7 +97,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/joe"
+            android:id="@+id/genre"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal|top"
