@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:text="Joostb2@hotmail.com"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#ffffff"
         android:textSize="48sp" />
 
 
