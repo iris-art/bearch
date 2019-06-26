@@ -42,7 +42,7 @@ public class bandDetail extends AppCompatActivity {
         name = findViewById(R.id.name);
         description = findViewById(R.id.description);
         location = findViewById(R.id.location);
-        genre = findViewById(R.id.genre);
+        genre = findViewById(R.id.genre10);
 
         Intent intent = getIntent();
         String band = intent.getStringExtra("band");
