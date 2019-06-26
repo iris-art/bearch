@@ -17,6 +17,7 @@ public class memberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member);
+        memberActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed1);
 
 //        define listview and list for listview
         list = new ArrayList<>();

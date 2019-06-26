@@ -31,6 +31,7 @@ public class requestsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requests);
+        requestsActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed1);
 
 //        define list and listview with onclicklistener
         list = new ArrayList<>();
