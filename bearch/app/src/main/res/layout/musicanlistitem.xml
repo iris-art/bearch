@@ -7,13 +7,15 @@
 
     <TextView
         android:id="@+id/textView100"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="229dp"
+        android:layout_height="41dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="end"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="99dp"
+        android:layout_marginEnd="157dp"
+        android:gravity="start"
         android:text="Marshmallow"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/black"
@@ -23,15 +25,15 @@
 
     <TextView
         android:id="@+id/textView101"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="288dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/textView103"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="213dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
         android:gravity="end"
         android:text="Android 6.0"
@@ -42,14 +44,14 @@
 
     <TextView
         android:id="@+id/textView103"
-        android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView100"
+        android:layout_width="284dp"
+        android:layout_height="44dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="310dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="1dp"
         android:gravity="end"
         android:text="23"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -58,23 +60,16 @@
 
     <TextView
         android:id="@+id/textView102"
-        android:layout_width="200dp"
-        android:layout_height="62dp"
+        android:layout_width="401dp"
+        android:layout_height="57dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="165dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="78dp"
         android:text="23"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-
-    </LinearLayout>
 
 </RelativeLayout>

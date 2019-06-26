@@ -65,10 +65,12 @@ public class FilterMusicanActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (spinner1.getSelectedItem().toString().equals("All")){
                     spinner2.setVisibility(View.INVISIBLE);
-                    TextView textView = findViewById(R.id.textView);
+                    TextView textView = findViewById(R.id.textview1000);
                     textView.setVisibility(View.INVISIBLE);
                 }else {
                     spinner2.setVisibility(View.VISIBLE);
+                    TextView textView = findViewById(R.id.textview1000);
+                    textView.setVisibility(View.VISIBLE);
 //                get Province and string[] with all the cities
                     String Province = getResources().getStringArray(R.array.Provinces)[position-1] + "_filter";
                     int resId = getResId(Province, R.array.class);
