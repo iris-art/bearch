@@ -53,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        ProfileActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background4);
+        ProfileActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed2);
 
 //        get all the values from sharedpreferences and set in contentview
         String Name = getPreference("Name");
@@ -280,13 +280,28 @@ public class ProfileActivity extends AppCompatActivity {
         return resizedBitmap;
     }
 
+//    class for connecting to api for save_user function
     public class SaveUser extends AsyncTask<String, Void, String> {
+        Response response;
+
+//        if request is finished
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+//            if succes, show toast
+            if (response.isSuccessful()){
+                showToast("Profile Updated succesfully");
+            }else{
+                showToast("Oops something went wrong");
+            }
+        }
+
+//            request to api handled in the background
         @Override
         protected String doInBackground(String... strings) {
-            SharedPreferences sharedPreferences6=getSharedPreferences("ImageURI",MODE_PRIVATE);
-            SharedPreferences.Editor editor6 = sharedPreferences6.edit();
-            editor6.putString("ImageURI",encodeImage);
-            editor6.apply();
+
+//            get values from call function
             String Name = strings[0];
             String Email = strings[1];
             String Location = strings[2];
@@ -294,67 +309,57 @@ public class ProfileActivity extends AppCompatActivity {
             String Instrument = strings[4];
             String Email1 = strings[5];
             String Province = strings[6];
-            Log.d("INSTRUMENT = ", Instrument);
-            String finalURL = "http://10.0.2.2/api/save_user.php" + "?user_name="+ Name +
-                    "&user_id1=" + Email1 +
-                    "&user_id=" + Email +
-                    "&user_location=" + Location +
-                    "&user_instrument=" + Instrument +
-                    "&user_genre=" + Genre +
-                    "&user_province=" + Province;
 
-            SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
-            SharedPreferences sharedPreferences1=getSharedPreferences("Email",MODE_PRIVATE);
-            SharedPreferences sharedPreferences2=getSharedPreferences("Genre",MODE_PRIVATE);
-            SharedPreferences sharedPreferences3=getSharedPreferences("Instrument",MODE_PRIVATE);
-            SharedPreferences sharedPreferences4=getSharedPreferences("Location",MODE_PRIVATE);
-            SharedPreferences sharedPreferences7=getSharedPreferences("Province",MODE_PRIVATE);
+//            string for finding api
+            String finalURL = "http://10.0.2.2/api/save_user.php";
 
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-            SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-            SharedPreferences.Editor editor3 = sharedPreferences3.edit();
-            SharedPreferences.Editor editor4 = sharedPreferences4.edit();
-            SharedPreferences.Editor editor7 = sharedPreferences7.edit();
+//            set values in preferences
+            setPreference("Name",Name);
+            setPreference("Email",Email);
+            setPreference("Genre",Genre);
+            setPreference("Instrument",Instrument);
+            setPreference("Location",Location);
+            setPreference("Province",Province);
+            setPreference("ImageURI",encodeImage);
 
-            editor.putString("Name",Name);
-            editor1.putString("Email",Email);
-            editor2.putString("Genre",Genre);
-            editor3.putString("Instrument",Instrument);
-            editor4.putString("Location",Location);
-            editor7.putString("Province",Province);
-            editor.apply();
-            editor1.apply();
-            editor2.apply();
-            editor3.apply();
-            editor4.apply();
-            editor7.apply();
-            Log.d("URL = ", Name + Email + Location + Genre + Instrument);
             OkHttpClient okHttpClient = new OkHttpClient();
+
+//            make form body with post data
             RequestBody formBody = new FormBody.Builder()
                     .add("image_uri", encodeImage)
+                    .add("user_name",Name)
+                    .add("user_id1",Email1)
+                    .add("user_id",Email)
+                    .add("user_location",Location)
+                    .add("user_instrument",Instrument)
+                    .add("user_genre",Genre)
+                    .add("user_province",Province)
                     .build();
+
+//            make and execute request
             Request request =  new Request.Builder()
                     .url(finalURL)
                     .get()
                     .post(formBody)
                     .build();
-            Response response = null;
+
+//            try getting a good response
             try{
                 response = okHttpClient.newCall(request).execute();
-                String result = response.body().string();
-                Log.d("Result", result);
-                if (response.isSuccessful()){
-                    showToast("Profile Updated succesfully");
-                }else{
-                    showToast("Oops something went wrong");
-                }
 
             }catch (Exception e){
                 e.printStackTrace();
             }
             return null;
         }
+    }
+
+//    easy function for setting the shared preferences
+    private void setPreference(String name, String value){
+        SharedPreferences sharedPreferences=getSharedPreferences(name,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(name,value);
+        editor.apply();
     }
 
 //    function for showing Toast messages

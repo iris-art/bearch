@@ -16,8 +16,10 @@ import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class bandDetail extends AppCompatActivity {
@@ -29,12 +31,12 @@ public class bandDetail extends AppCompatActivity {
     TextView Members;
     String request;
     String band;
-
+    String Name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band_detail);
-        bandDetail.this.getWindow().setBackgroundDrawableResource(R.drawable.band_background);
+        bandDetail.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed3);
 
 //        get textviews and set values in it
         name = findViewById(R.id.name);
@@ -52,11 +54,12 @@ public class bandDetail extends AppCompatActivity {
         genre.setText(propperties[4]);
         request = propperties[5];
 
+        Name = propperties[1];
 //        put members in textview beneath eachother
         String[] members = propperties[6].split("<>");
-        String members1 = "band members\nhead member = ";
-        for(int i=0; i<members.length;i++){
-            members1 += members[i] + "\n";
+        String members1 = "band members\nhead member =\nO   " + members[0]+ "\nother members = \n";
+        for(int i=1; i<members.length;i++){
+            members1 += "O  " + members[i] + "\n";
         }
         Members = findViewById(R.id.members);
         Members.setText(members1);
@@ -64,10 +67,17 @@ public class bandDetail extends AppCompatActivity {
 //        see if someone is in a band, if not let them make a new band or choose one.
         SharedPreferences sharedPreferences=getSharedPreferences("Band",MODE_PRIVATE);
         String Band = sharedPreferences.getString("Band", "None");
+        SharedPreferences sharedPreferences1=getSharedPreferences("Name",MODE_PRIVATE);
+        String Name =sharedPreferences1.getString("Name","None");
+
         if (!Band.equals("None")){
             Button btn = findViewById(R.id.button);
             btn.setClickable(false);
             btn.setText("Already in a band");
+        }else if(Name.equals("None")){
+            Button btn = findViewById(R.id.button);
+            btn.setClickable(false);
+            btn.setVisibility(View.INVISIBLE);
         }
 
 //        get the band Image
@@ -169,16 +179,23 @@ public class bandDetail extends AppCompatActivity {
             String Email = strings[1];
 
 //            url to locate the api
-            String finalURL = "http://10.0.2.2/api/make_request.php" +
-                    "?string=" + request +
-                    "&band_name=" + band +
-                    "&user_id=" + Email;
+            String finalURL = "http://10.0.2.2/api/make_request.php";
 
 //            create OkHttp and Request
             OkHttpClient okHttpClient = new OkHttpClient();
+
+//            make form body with post data
+            RequestBody formBody = new FormBody.Builder()
+                    .add("string", request)
+                    .add("band_name", Name)
+                    .add("user_id", Email)
+                    .build();
+
+//            create and execute request
             Request request =  new Request.Builder()
                     .url(finalURL)
                     .get()
+                    .post(formBody)
                     .build();
             Response response = null;
             try{

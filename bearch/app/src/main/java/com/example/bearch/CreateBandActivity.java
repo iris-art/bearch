@@ -130,28 +130,16 @@ public class CreateBandActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Log.d("Result", result);
 //            check if result is what we wanted
             if (result.equalsIgnoreCase("Band created successfullyBand created successfully")) {
                 showToast("Band created successfully");
 
 //                save all the new values in shared preferences
-                SharedPreferences sharedPreferences5=getSharedPreferences("Band",MODE_PRIVATE);
-                SharedPreferences.Editor editor5 = sharedPreferences5.edit();
-                editor5.putString("Band",Name);
-                editor5.apply();
-
-                SharedPreferences sharedPreferences10 = getSharedPreferences("bandDescription", MODE_PRIVATE);
-                SharedPreferences sharedPreferences11 = getSharedPreferences("bandLocation", MODE_PRIVATE);
-                SharedPreferences sharedPreferences12 = getSharedPreferences("bandGenre", MODE_PRIVATE);
-                SharedPreferences.Editor editor10 = sharedPreferences10.edit();
-                SharedPreferences.Editor editor11 = sharedPreferences11.edit();
-                SharedPreferences.Editor editor12 = sharedPreferences12.edit();
-                editor10.putString("bandDescription", Description);
-                editor11.putString("bandLocation", Location);
-                editor12.putString("bandGenre", Genre);
-                editor10.apply();
-                editor11.apply();
-                editor12.apply();
+                setPreference("Band",Name);
+                setPreference("bandDescription", Description);
+                setPreference("bandLocation", Location);
+                setPreference("bandGenre", Genre);
 
 //                go to homescreen
                 Intent i = new Intent(CreateBandActivity.this,
@@ -159,11 +147,20 @@ public class CreateBandActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
+
 //            else something went wrong
             else{
                 showToast("Oops something went wrong!");
             }
         }
+
+//    easy function for setting the shared preferences
+        private void setPreference(String name, String value){
+        SharedPreferences sharedPreferences=getSharedPreferences(name,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(name,value);
+        editor.apply();
+    }
 
 //        function for connecting to api in the background
         @Override

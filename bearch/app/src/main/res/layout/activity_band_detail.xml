@@ -22,8 +22,6 @@
                 android:layout_height="219dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
-                android:clickable="true"
-                android:onClick="onClick"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +70,7 @@
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/genre"
+            android:id="@+id/texview00"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

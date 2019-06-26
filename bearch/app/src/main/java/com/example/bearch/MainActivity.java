@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MainActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed1);
 
 //        get User values from sharedPreferences
         SharedPreferences sharedPreferences=getSharedPreferences("Name",MODE_PRIVATE);
@@ -43,18 +44,24 @@ public class MainActivity extends AppCompatActivity {
             btnRight.setOnClickListener(this::logOut);
             btnLeft.setText("Profile");
             btnRight.setText("Log Out");
-        }
-        try{
-            String[] band = Band.split("%");
-            btnBand.setText("Request to:" + band[1]);
-            btnBand.setClickable(false);
-        }catch(Exception e){
-            if (!Band.equals("None")) {
-                btnBand.setClickable(true);
-                btnBand.setText("My band");
-                btnBand.setOnClickListener(this::myBand);
+            try{
+                String[] band = Band.split("%");
+                btnBand.setText("Request to:" + band[1]);
+                btnBand.setClickable(false);
+            }catch(Exception e){
+                if (!Band.equals("None")) {
+                    btnBand.setClickable(true);
+                    btnBand.setText("My band");
+                    btnBand.setOnClickListener(this::myBand);
+                }else{
+                    btnBand.setClickable(true);
+                    btnBand.setText("Create Band");
+                    btnBand.setOnClickListener(this::createBand);
+                }
             }
+
         }
+
 
 
     }

@@ -36,7 +36,7 @@ public class musicanResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musican_result);
-        musicanResultActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background7);
+        musicanResultActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed2);
 
 //        define ListView and list
         nListView = findViewById(R.id.listView2);

@@ -15,8 +15,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.example.bearch.ProfileActivity.getResId;
@@ -36,12 +38,13 @@ public class RegisterActivity extends AppCompatActivity {
     String Location;
     String Genre;
     String Instrument;
-    final String url_register = "http://10.0.2.2/api/register_user.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        RegisterActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed2);
+
         etName = findViewById(R.id.editText8);
         etEmail = findViewById(R.id.editText5);
         etPassword = findViewById(R.id.editText6);
@@ -52,7 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
         spinner2 = findViewById(R.id.spinner2);
         spinner3 = findViewById(R.id.spinner3);
         spinner4 = findViewById(R.id.spinner4);
-        //        make ArrayAdapters for spinners
+
+//        make ArrayAdapters for spinners
         ArrayAdapter ProvincesAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.Provinces,
@@ -118,51 +122,67 @@ public class RegisterActivity extends AppCompatActivity {
         new RegisterUser().execute();
     }
 
-
+//    class for calling register_user function of api
     public class RegisterUser extends AsyncTask<String, Void, String>{
-        @Override
+
+        Response response;
+        String result;
+
+//        if finished
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
+//        if server responded succesfully
+        if (response.isSuccessful()){
+            if (result.equalsIgnoreCase("User registered successfully")){
+                showToast("Register succesfull");
+                Intent i = new Intent(RegisterActivity.this,
+                        LogInActivity.class);
+                startActivity(i);
+                finish();
+            }else if(result.equalsIgnoreCase("User already exists")){
+                showToast("User already exists");
+            }else{
+                Log.d("RESULT", result);
+                showToast("Oops something went wrong!");
+            }
+        }
+    }
+
+//    what happens on background
+    @Override
         protected String doInBackground(String... strings) {
 
-            Log.d("INSTRUMENT = ", Instrument);
-            System.out.println(Name + Email + Password);
-            String finalURL = url_register + "?user_name="+ Name +
-                    "&user_id=" + Email +
-                    "&user_password=" + Password +
-                    "&user_location=" + Location +
-                    "&user_instrument=" + Instrument +
-                    "&user_genre=" + Genre +
-                    "&user_province=" + Province;
-
-            Log.d("URL = ", finalURL);
             OkHttpClient okHttpClient = new OkHttpClient();
+
+//            make form body with post data
+            RequestBody formBody = new FormBody.Builder()
+                .add("user_id", Email)
+                .add("user_name", Name)
+                .add("user_password", Password)
+                .add("user_location",Location)
+                .add("user_instrument",Instrument)
+                .add("user_genre",Genre)
+                .add("user_province",Province)
+                .build();
+
+//            location of api
+            String url_register = "http://10.0.2.2/api/register_user.php";
+
+//            make and execute request
             Request request =  new Request.Builder()
-                    .url(finalURL)
+                    .url(url_register)
                     .get()
+                    .post(formBody)
                     .build();
-            Response response = null;
+
+//            check if passwords match
             if (etPassword.getText().toString().equals(etPassword1.getText().toString())){
                 try{
                     response = okHttpClient.newCall(request).execute();
-                    if (response.isSuccessful()){
-                        String result = response.body().string();
-                        Log.d("result = ", result);
-                        if (result.equalsIgnoreCase("User registered successfully")){
-                            Log.d("joe", "2");
-                            showToast("Register succesfull");
-                            Intent i = new Intent(RegisterActivity.this,
-                                    LogInActivity.class);
-                            startActivity(i);
-                            finish();
-                        }else if(result.equalsIgnoreCase("User already exists")){
-                            Log.d("joe", "3");
-                            showToast("User already exists");
-                        }else{
-                            System.out.println(Name + Email + etPassword.getText().toString() + etPassword1.getText().toString());
-                            showToast("Oops something went wrong!");
-                        }
-                    }
+                    result = response.body().string();
                 }catch (Exception e){
-                    Log.d("joe", "6");
                     e.printStackTrace();
                 }
             }else{

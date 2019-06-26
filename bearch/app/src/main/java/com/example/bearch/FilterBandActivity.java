@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import static com.example.bearch.ProfileActivity.getResId;
 
@@ -24,7 +25,7 @@ public class FilterBandActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_band);
-        FilterBandActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background9);
+        FilterBandActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed1);
 
         btnSearch = findViewById(R.id.button8);
         spinner1 = findViewById(R.id.spinner1);
@@ -58,6 +59,8 @@ public class FilterBandActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (spinner1.getSelectedItem().toString().equals("All")){
                     spinner2.setVisibility(View.INVISIBLE);
+                    TextView textView = findViewById(R.id.textView);
+                    textView.setVisibility(View.INVISIBLE);
                 }else{
                     spinner2.setVisibility(View.VISIBLE);
 //                get Province and string[] with all the cities

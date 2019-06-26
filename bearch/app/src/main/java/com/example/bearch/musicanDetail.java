@@ -35,7 +35,7 @@ public class musicanDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musican_detail);
-        getWindow().setBackgroundDrawableResource(R.drawable.background4);
+        getWindow().setBackgroundDrawableResource(R.drawable.brushed2);
 
 //        get extras from intent
         Intent intent = getIntent();

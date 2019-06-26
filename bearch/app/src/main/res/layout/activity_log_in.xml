@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#127090"
     tools:context=".LogInActivity">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="158dp"
-        android:layout_height="117dp"
+        android:layout_width="257dp"
+        android:layout_height="286dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:foregroundGravity="center"
+        android:gravity="center"
         android:text="Log In"
         android:textColor="#FFFFFF"
         android:textSize="50sp"
@@ -21,25 +22,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="283dp"
-        android:layout_height="212dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="fitStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.812"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/img" />
-
     <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:drawableLeft="@drawable/ic_action_name"
         android:ems="10"
@@ -48,16 +35,16 @@
         android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/editText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_action_password"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:drawableLeft="@drawable/ic_action_password"
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
@@ -68,12 +55,13 @@
 
     <Button
         android:id="@+id/button4"
+        style="@android:style/Widget.Material.Button.Borderless.Small"
         android:layout_width="201dp"
         android:layout_height="78dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
-        android:background="#127090"
+        android:background="#00FFFFFF"
         android:onClick="Register"
         android:text="or register me"
         android:textColor="#FFFFFF"
@@ -84,12 +72,12 @@
 
     <Button
         android:id="@+id/button6"
+        style="@android:style/Widget.Material.Button.Borderless.Small"
         android:layout_width="216dp"
         android:layout_height="67dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
-        android:background="#127090"
         android:onClick="logIn"
         android:text="Login"
         android:textColor="#FFFFFF"

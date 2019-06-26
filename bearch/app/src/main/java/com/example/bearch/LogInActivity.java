@@ -30,6 +30,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+        LogInActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed2);
     }
 
 //    function for going to register activity
@@ -57,6 +58,7 @@ public class LogInActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
 //            if fail, than don't save values and stay on activity
             if (result.equals("fail")){
                 Toast.makeText(LogInActivity.this, "Email or Password mismatched!", Toast.LENGTH_SHORT).show();
@@ -100,13 +102,16 @@ public class LogInActivity extends AppCompatActivity {
                     .writeTimeout(100, TimeUnit.SECONDS)
                     .readTimeout(300, TimeUnit.SECONDS).build();
 
+//            make form body with post data
             RequestBody formBody = new FormBody.Builder()
                     .add("user_id", Email)
                     .add("user_password", Password)
                     .build();
 
+//            string for finding api
             String url_login = "http://10.0.2.2/api/login_user.php";
 
+//            make and execute request
             Request request = new Request.Builder()
                     .url(url_login)
                     .post(formBody)
@@ -141,12 +146,17 @@ public class LogInActivity extends AppCompatActivity {
         }
 
 //        save all the values in the preferences
-        setPreference("bandDescription",results[2]);
-        setPreference("bandLocation",results[3]);
-        setPreference("bandGenre",results[4]);
-        setPreference("bandRequests",results[5]);
-        setPreference("bandMembers",results[6]);
-        setPreference("BandImageURI",encodeImage);
+        try{
+            setPreference("bandDescription",results[2]);
+            setPreference("bandLocation",results[3]);
+            setPreference("bandGenre",results[4]);
+            setPreference("bandRequests",results[5]);
+            setPreference("bandMembers",results[6]);
+            setPreference("BandImageURI",encodeImage);
+        }catch(Exception e){
+
+        }
+
 
     }
 

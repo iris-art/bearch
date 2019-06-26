@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#127090"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#127090"
-        android:backgroundTint="#127090"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="262dp"
-            android:layout_height="78dp"
+            android:layout_width="350dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:foregroundGravity="center"
+            android:gravity="center"
             android:text="Register"
             android:textColor="#FFFFFF"
             android:textSize="50sp"
@@ -30,22 +30,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="204dp"
-            android:layout_height="140dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="#127090"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:srcCompat="@drawable/img" />
+        <TextView
+            android:id="@+id/textview6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="email"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/editText5"
-            android:layout_width="306dp"
+            android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -60,9 +55,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText8" />
 
+        <TextView
+            android:id="@+id/textview7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="full name"
+            android:textColor="#FFFFFF" />
+
         <EditText
             android:id="@+id/editText8"
-            android:layout_width="306dp"
+            android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
@@ -77,9 +80,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
+        <TextView
+            android:id="@+id/textview11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="password"
+            android:textColor="#FFFFFF" />
+
         <EditText
             android:id="@+id/editText7"
-            android:layout_width="304dp"
+            android:layout_width="350dp"
             android:layout_height="78dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
@@ -94,9 +105,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
+        <TextView
+            android:id="@+id/textview12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="password (again)"
+            android:textColor="#FFFFFF" />
+
         <EditText
             android:id="@+id/editText6"
-            android:layout_width="312dp"
+            android:layout_width="350dp"
             android:layout_height="73dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
@@ -113,7 +132,7 @@
 
         <TextView
             android:id="@+id/textview2"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Select Region "
@@ -121,15 +140,13 @@
 
         <Spinner
             android:id="@+id/spinner1"
-            android:layout_width="353dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
             android:spinnerMode="dialog" />
 
         <TextView
             android:id="@+id/textview"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Select nearest city "
@@ -137,15 +154,13 @@
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="359dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
             android:spinnerMode="dropdown" />
 
         <TextView
             android:id="@+id/textview3"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Select music style"
@@ -153,15 +168,13 @@
 
         <Spinner
             android:id="@+id/spinner3"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
             android:spinnerMode="dropdown" />
 
         <TextView
             android:id="@+id/textview4"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Select instrument"
@@ -169,20 +182,17 @@
 
         <Spinner
             android:id="@+id/spinner4"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#127090"
             android:spinnerMode="dropdown" />
 
         <Button
             android:id="@+id/button8"
-            android:layout_width="307dp"
+            android:layout_width="350dp"
             android:layout_height="74dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="#127090"
             android:onClick="onClick"
             android:text="Register"
             android:textColor="#FFFFFF"

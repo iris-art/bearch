@@ -33,7 +33,7 @@ public class bandResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band_result);
-        bandResultActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.background7);
+        bandResultActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed3);
 
 //        define ListView
         nListView = findViewById(R.id.listView1);
@@ -104,20 +104,20 @@ public class bandResultActivity extends AppCompatActivity {
                     .connectTimeout(100, TimeUnit.SECONDS)
                     .writeTimeout(100, TimeUnit.SECONDS)
                     .readTimeout(300, TimeUnit.SECONDS).build();
-            RequestBody formBody = new FormBody.Builder()
-                    .build();
+
             String url_bands = "http://10.0.2.2/api/read_bands.php?band_name=None";
             Request request = new Request.Builder()
                     .url(url_bands)
-                    .post(formBody)
                     .build();
             Response response = null;
 
             try{
                 response = okHttpClient.newCall(request).execute();
+
 //                if response succesfull then filter the bands
                 if(response.isSuccessful()){
                     result = response.body().string();
+                    Log.d("result=", result);
                 }
             }catch(Exception e){
                 e.printStackTrace();

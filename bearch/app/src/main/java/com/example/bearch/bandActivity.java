@@ -53,7 +53,7 @@ public class bandActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band);
         imageView = findViewById(R.id.imageView4);
-        bandActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.band_background);
+        bandActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed3);
 
 
         String bandLocation = getPreference("bandLocation");

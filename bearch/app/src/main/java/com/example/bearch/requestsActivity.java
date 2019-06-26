@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class requestsActivity extends AppCompatActivity {
@@ -109,6 +110,7 @@ public class requestsActivity extends AppCompatActivity {
 //    function for connecting to api for adding new member to band in database
     public class AddBandMember extends AsyncTask<String, Void, String> {
         String result;
+        Response response;
 
 //        if request is finished
     @Override
@@ -120,33 +122,40 @@ public class requestsActivity extends AppCompatActivity {
 //    function that runs in the background
     @Override
         protected String doInBackground(String... strings) {
+
+//        get values from call function
             String Email = strings[0];
             String Band = strings[1];
-            String string = strings[2];
-            String string1 = strings[3];
-            String finalURL = "http://10.0.2.2/api/accept_request.php" +
-                    "?user_id=" + Email +
-                    "&band_name=" + Band +
-                    "&string="+ string +
-                    "&string1="+ string1;
-
+            String requests = strings[2];
+            String members = strings[3];
+            String finalURL = "http://10.0.2.2/api/accept_request.php";
 
             OkHttpClient okHttpClient = new OkHttpClient();
+
+//            make form body with post data
+            RequestBody formBody = new FormBody.Builder()
+                .add("user_id",Email)
+                .add("band_name",Band)
+                .add("requests",requests)
+                .add("members",members)
+                .build();
+
+//            make and execute request
             Request request =  new Request.Builder()
                     .url(finalURL)
                     .get()
+                    .post(formBody)
                     .build();
-            Response response = null;
+
+//            check if request is handled correct
             try{
                 response = okHttpClient.newCall(request).execute();
                 if (response.isSuccessful()){
                     result = response.body().string();
-
                 }
             }catch (Exception e){
                 e.printStackTrace();
             }
-
 
             return null;
         }
