@@ -204,7 +204,7 @@ public class bandDetail extends AppCompatActivity {
                 if (response.isSuccessful()){
                     SharedPreferences sharedPreferences5=getSharedPreferences("Band",MODE_PRIVATE);
                     SharedPreferences.Editor editor5 = sharedPreferences5.edit();
-                    editor5.putString("Band", "request %" + Band);
+                    editor5.putString("Band", "request %" + Name);
                     editor5.apply();
                     Intent intent = new Intent(bandDetail.this, MainActivity.class);
                     startActivity(intent);

@@ -49,6 +49,7 @@ public class CreateBandActivity extends AppCompatActivity {
         spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);
         spinner3 = findViewById(R.id.spinner3);
+        CreateBandActivity.this.getWindow().setBackgroundDrawableResource(R.drawable.brushed3);
 
 //        make ArrayAdapters for spinners
         ArrayAdapter ProvincesAdapter = ArrayAdapter.createFromResource(

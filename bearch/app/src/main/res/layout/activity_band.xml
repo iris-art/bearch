@@ -56,25 +56,32 @@
 
             <Button
                 android:id="@+id/button7"
+                style="@android:style/Widget.Material.Button.Borderless.Small"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:onClick="Requests"
-                android:text="see requests" />
+                android:text="see requests"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/button5"
+                style="@android:style/Widget.Material.Button.Borderless.Small"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:onClick="Members"
-                android:text="see members" />
+                android:text="see members"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
         </LinearLayout>
 
-        <TextView
+        <EditText
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:editable="true"
             android:gravity="center"
             android:text="TextView"
             android:textColor="#FFFFFF"
@@ -126,6 +133,7 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="74dp"
+            style="@android:style/Widget.Material.Button.Borderless.Small"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"

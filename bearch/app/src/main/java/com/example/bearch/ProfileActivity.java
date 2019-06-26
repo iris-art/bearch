@@ -209,7 +209,7 @@ public class ProfileActivity extends AppCompatActivity {
                 spinner3.getSelectedItem().toString(),
                 spinner4.getSelectedItem().toString(),
                 Email,
-                spinner2.getSelectedItem().toString());
+                spinner1.getSelectedItem().toString());
     }
 
 //    on Click for opening Gallery
