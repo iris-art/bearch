@@ -1,6 +1,7 @@
 package com.example.bearch;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,18 +27,16 @@ public class bandListAdapter extends ArrayAdapter<String> {
 
 //        get specific band from all the bands
         String band = ListItems.get(position);
-
+        Log.d("band", band);
 //        get all the propperties and set in the textviews
         String[] bandPropperties = band.split("~");
-        String bandName = bandPropperties[0];
-        String bandDescription = bandPropperties[1];
-        String bandLocation = bandPropperties[2];
-        String bandGenre = bandPropperties[3];
+        String bandName = bandPropperties[1];
+        String bandLocation = bandPropperties[3];
+        String bandGenre = bandPropperties[4];
 
-        TextView Name = convertView.findViewById(R.id.textView102);
+        TextView Genre = convertView.findViewById(R.id.textView102);
         TextView Location = convertView.findViewById(R.id.textView101);
-        TextView Genre = convertView.findViewById(R.id.textView100);
-
+        TextView Name = convertView.findViewById(R.id.textView100);
 
         Name.setText(bandName);
         Location.setText(bandLocation);
