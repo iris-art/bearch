@@ -45,7 +45,7 @@ Almost all the pages do get values from the database, that's why I've got quite 
 
 - ProfileActivity : This activity show the profile of the user with the option to edit the profile (including profile-picture)
 
-### challanges
+### challenges
 
 - During the time I was building this app I found out that using the Google Maps Api was not free. So checking where the user was and calculating the distance between band and member was pretty impossible. I made it easy for myself by just giving the users a couple of options per Province (for now only in the Netherlands) to choose from. This is also the way of filtering bands and musicians, just by the nearest city they life to. 
 - Another struggle I got was with the slow api, I spent a whole day on changing my api to localhost.
@@ -53,3 +53,7 @@ Almost all the pages do get values from the database, that's why I've got quite 
 - I also found out that when I allowed the user to change their email it also has to be updated in the member-propertie, request-propertie, and sharedPreferences so that'll give a lot of work extra so I made it impossible for the user to change their email and also did this for the bands to change their band-name. 
 - My text also got pretty unreadable because I wanted images as background, so the images I got from unsplash.com now all got blurred a little bit more so the text is more readable. 
 - But most of my troubles came with connecting the api proper to the database and to the app itself. I had to use Log.d() a lot because sometimes it was unclear what the server got from the app and what it should exactly respond. 
+
+### satisfaction
+
+They app in this shape has a lot of parts that could be improved a lot if I'd more. The first thing I would change is the way of sending request and made it possible to request and join multiple bands and also make it possible to kick members or to leave the band self by the user. Also saving images would've been done otherwise if I had more time because I downgrade the images a lot by now. There are plenty of trade-offs because the filter is not very precise, the bands/users could have more properties, there isn't a contact form and not at all a chat function. There isn't also a way of posting a request for a new band member at your band.
