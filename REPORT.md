@@ -31,15 +31,15 @@ Almost all the pages do get values from the database, which is why I've got quit
 
 - CreateBandActivity : Here it is possible for the user to create a new band.
 
-- bandActivity : This activity takes the values of the band the user joined and shows them editable in the view, it also makes it possible to change the profile-picture of the band. When the save button is hit, the api is requested to save the values in the database. Also the options see members/requests are here available and those starts the Requests/MembersActivity.
+- BandActivity : This activity takes the values of the band the user joined and shows them editable in the view, it also makes it possible to change the profile-picture of the band. When the save button is hit, the api is requested to save the values in the database. Also the options see members/requests are here available and those starts the Requests/MembersActivity.
 
 - RequestsActivity/MemberActivity : These activities show respectively the requests the band got from users and the members a band has got.
 
-- FilterMusicianActivity/FilterBandActivity : These activities starts when one of the buttons (Search Bands/Musicians) is clicked from homescreen. In this activities are 4 filter options available (3 for band). If the button "Search" is hit than band/musicianResultActivity will start with those filter values.
+- FilterMusicianActivity/FilterBandActivity : These activities starts when one of the buttons (Search Bands/Musicians) is clicked from homescreen. In this activities are 4 filter options available (3 for band). If the button "Search" is hit than Band/MusicianResultActivity will start with those filter values.
 
-- bandResultActivity/MusicianResultActivity : These activities starts when the filtering activities are finished and takes the values of the filter activity. It goes through the database tables with users and bands and shows all the results which matches with the filter values. The results of the filter matches are shown in a ListView. 
+- BandResultActivity/MusicianResultActivity : These activities starts when the filtering activities are finished and takes the values of the filter activity. It goes through the database tables with users and bands and shows all the results which matches with the filter values. The results of the filter matches are shown in a ListView. 
 
-- bandDetail/MusicianDetail : These activities start when one of the bands or musicians is clicked from the Musician/Band ResultActivity and shows the profile of the clicked band/musician. If a band is clicked it alsof shows the option "make reaction" if the user is not already in a band or made a request to a band.
+- BandDetail/MusicianDetail : These activities start when one of the bands or musicians is clicked from the Musician/Band ResultActivity and shows the profile of the clicked band/musician. If a band is clicked it alsof shows the option "make reaction" if the user is not already in a band or made a request to a band.
 
 - LogInActivity/RegisterActivity/LogOutActivity : The most important functions for my app, here the user is able to login or make an account for the app. If the user is finished with the app the user can be logged out by hitting the "log out" button.
 
