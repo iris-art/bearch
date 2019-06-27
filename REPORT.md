@@ -23,10 +23,10 @@ Those leads all to different screens:
 - Login -> redirects to login page
 - Register -> redirects to register page
 
-### large description functionality
+### Large description functionality
 Almost all the pages do get values from the database, that's why I've got quite a few different java activities. 
 - They values I needed from the database did I get with an Api. This Api was hosted on 000webhost.com but in a couple of days that server became very slow. So for production I used my local machine as host for those api files. All the api (PHP) files did I wrote by myself and could be found in the api folder. I made requests to those api files with OkHttpRequests POST and GET requests. All the requests where user values where included were POST requests and others were GET. 
-##### explaination of all activities
+##### Explaination of all activities
 - MainActivity : This is the homepage which checks if user is logged in and if a user is in a band an shows the options the user has in the app. If one of the buttons is clicked the other activities will start.
 
 - CreateBandActivity : Here it is possible for the user to create a new band.
@@ -45,15 +45,15 @@ Almost all the pages do get values from the database, that's why I've got quite 
 
 - ProfileActivity : This activity show the profile of the user with the option to edit the profile (including profile-picture)
 
-### challenges
+### Challenges
 
 - During the time I was building this app I found out that using the Google Maps Api was not free. So checking where the user was and calculating the distance between band and member was pretty impossible. I made it easy for myself by just giving the users a couple of options per Province (for now only in the Netherlands) to choose from. This is also the way of filtering bands and musicians, just by the nearest city they life to. 
 - Another struggle I got was with the slow api, I spent a whole day on changing my api to localhost.
 - When I was trying to create the request function I found out that there was not a proper way to do this easily when users are allowed to join multiple bands or make multiple request (for now it's only possible to join one band). At this time it's also not possible to change the members of your band and the members are all showed as email-names because that were the only UNIQUE fields in the database.
 - I also found out that when I allowed the user to change their email it also has to be updated in the member-propertie, request-propertie, and sharedPreferences so that'll give a lot of work extra so I made it impossible for the user to change their email and also did this for the bands to change their band-name. 
 - My text also got pretty unreadable because I wanted images as background, so the images I got from unsplash.com now all got blurred a little bit more so the text is more readable. 
-- But most of my troubles came with connecting the api proper to the database and to the app itself. I had to use Log.d() a lot because sometimes it was unclear what the server got from the app and what it should exactly respond. 
+- Most of my troubles came with connecting the api proper to the database and to the app itself. I had to use Log.d() a lot because sometimes it was unclear what the server got from the app and what it should exactly respond. 
 
-### satisfaction
+### Satisfaction
 
 They app in this shape has a lot of parts that could be improved a lot if I'd more. The first thing I would change is the way of sending request and made it possible to request and join multiple bands and also make it possible to kick members or to leave the band self by the user. Also saving images would've been done otherwise if I had more time because I downgrade the images a lot by now. There are plenty of trade-offs because the filter is not very precise, the bands/users could have more properties, there isn't a contact form and not at all a chat function. There isn't also a way of posting a request for a new band member at your band.
