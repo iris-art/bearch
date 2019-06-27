@@ -48,7 +48,7 @@ Almost all the pages do get values from the database, that's why I've got quite 
 ### Challenges
 
 - During the time I was building this app I found out that using the Google Maps Api was not free. So checking where the user was and calculating the distance between band and member was pretty impossible. I made it easy for myself by just giving the users a couple of options per Province (for now only in the Netherlands) to choose from. This is also the way of filtering bands and musicians, just by the nearest city they life to. 
-- Another struggle I got was with the slow api, I spent a whole day on changing my api to localhost.
+- Another struggle I got was with the slow api, I spent a whole day on changing my api to localhost and setting up an remotemysql.com database.
 - When I was trying to create the request function I found out that there was not a proper way to do this easily when users are allowed to join multiple bands or make multiple request (for now it's only possible to join one band). At this time it's also not possible to change the members of your band and the members are all showed as email-names because that were the only UNIQUE fields in the database.
 - I also found out that when I allowed the user to change their email it also has to be updated in the member-propertie, request-propertie, and sharedPreferences so that'll give a lot of work extra so I made it impossible for the user to change their email and also did this for the bands to change their band-name. 
 - My text also got pretty unreadable because I wanted images as background, so the images I got from unsplash.com now all got blurred a little bit more so the text is more readable. 
