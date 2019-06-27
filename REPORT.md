@@ -27,22 +27,21 @@ Those leads all to different screens:
 Almost all the pages do get values from the database, that's why I've got quite a few different java activities. 
 - They values I needed from the database did I get with an Api. This Api was hosted on 000webhost.com but in a couple of days that server became very slow. So for production I used my local machine as host for those api files. All the api (PHP) files did I wrote by myself and could be found in the api folder. I made requests to those api files with OkHttpRequests POST and GET requests. All the requests where user values where included were POST requests and others were GET. 
 ##### explaination of all activities
-- bandActivity : this activity takes the values of the band the user joined and shows them editable in the view, it also makes it possible to change the profile-picture of the band. When the save button is hit, the api is requested to save the values in the database.
+- MainActivity : This is the homepage which checks if user is logged in and if a user is in a band an shows the options the user has in the app. If one of the buttons is clicked the other activities will start.
 
-- FilterMusicianActivity/FilterBandActivity : these activities starts when one of the buttons (Search Bands/Musicians) is clicked from homescreen. In this activities are 4 filter options available (3 for band) 
+- CreateBandActivity : Here it is possible for the user to create a new band.
 
-- bandResultActivity/MusicianResultActivity : these activities starts when the filtering activities are finished and takes the values of the filter activity. It goes through the database tables with users and bands and shows all the results which matches with the filter values. The results of the filter matches are shown in a ListView. 
+- bandActivity : This activity takes the values of the band the user joined and shows them editable in the view, it also makes it possible to change the profile-picture of the band. When the save button is hit, the api is requested to save the values in the database. Also the options see members/requests are here available and those starts the Requests/MembersActivity.
 
-- bandDetail/MusicianDetail : these activities start when one of the bands or musicians is clicked from the Musician/Band ResultActivity and shows the profile of the clicked band/musician.
+- RequestsActivity/MemberActivity : These activities show respectively the requests the band got from users and the members a band has got.
 
+- FilterMusicianActivity/FilterBandActivity : These activities starts when one of the buttons (Search Bands/Musicians) is clicked from homescreen. In this activities are 4 filter options available (3 for band). If the button "Search" is hit than band/musicianResultActivity will start with those filter values.
 
-- CreateBandActivity :
+- bandResultActivity/MusicianResultActivity : These activities starts when the filtering activities are finished and takes the values of the filter activity. It goes through the database tables with users and bands and shows all the results which matches with the filter values. The results of the filter matches are shown in a ListView. 
 
-- LogInActivity :
-- LogOutActivity :
-- MainActivity :
-- MemberActivity :
+- bandDetail/MusicianDetail : These activities start when one of the bands or musicians is clicked from the Musician/Band ResultActivity and shows the profile of the clicked band/musician. If a band is clicked it alsof shows the option "make reaction" if the user is not already in a band or made a request to a band.
 
-- ProfileActivity :
-- RegisterActivity :
-- RequestsActivity :
+- LogInActivity/RegisterActivity/LogOutActivity : The most important functions for my app, here the user is able to login or make an account for the app. If the user is finished with the app the user can be logged out by hitting the "log out" button.
+
+- ProfileActivity : This activity show the profile of the user with the option to edit the profile (including profile-picture)
+
